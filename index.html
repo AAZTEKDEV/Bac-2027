@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111827">\n<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">\n<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+<title>Mon Bac 2027 — V2</title>
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{--bg:#f5f7fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e7eaf0;--nav:#111827;--accent:#5b6ee1;--accent2:#14b8a6;--soft:#eef1ff;--green:#e9fbf7;--warn:#fff7e6;--shadow:0 10px 30px rgba(15,23,42,.08);--r:20px;--safe:max(12px,env(safe-area-inset-bottom))}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:linear-gradient(180deg,#edf1f9 0,#f8f9fc 260px);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transparent} a{color:inherit} .app{max-width:980px;margin:auto;padding:0 14px calc(96px + var(--safe))}
+.hero{margin:0 -14px 16px;padding:calc(18px + env(safe-area-inset-top)) 18px 25px;background:linear-gradient(135deg,#0f172a,#293a65 60%,#4f46e5 145%);color:#fff;border-radius:0 0 28px 28px;overflow:hidden;position:relative} .hero:after{content:"";position:absolute;width:220px;height:220px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-90px;top:-70px;box-shadow:0 0 0 34px rgba(255,255,255,.04),0 0 0 68px rgba(255,255,255,.025)}
+.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.12em;opacity:.75;font-weight:800} h1{font-size:30px;line-height:1.08;margin:8px 0;letter-spacing:-.035em} .hero p{margin:0;max-width:680px;color:#dce4f3;font-size:14px} .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px;position:relative;z-index:1} .scorecard{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);border-radius:17px;padding:13px;backdrop-filter:blur(10px)} .scorecard strong{display:block;font-size:22px;line-height:1.05;margin-bottom:4px} .scorecard span{font-size:11px;color:#dbe3f4} .scorecard.wide{grid-column:1/-1}
+.section{display:block;scroll-margin-top:10px;margin-bottom:15px} .js .section{display:none} .js .section.active{display:block} .grid{display:grid;gap:12px} .card{background:var(--panel);border:1px solid rgba(15,23,42,.06);border-radius:var(--r);padding:16px;box-shadow:var(--shadow)} .card h2,.card h3{margin:0;letter-spacing:-.02em} .card h2{font-size:19px} .card h3{font-size:16px} .sub{color:var(--muted);font-size:13px;margin-top:4px} .row{display:flex;align-items:center;justify-content:space-between;gap:12px} .pill{display:inline-flex;align-items:center;gap:5px;padding:7px 10px;border-radius:999px;background:#f2f4f7;color:#344054;font-size:12px;font-weight:800;white-space:nowrap} .pill.accent{background:var(--soft);color:#4653c9} .pill.green{background:var(--green);color:#087d70}
+.today{background:linear-gradient(135deg,#ecfdf7,#eef2ff);border-color:#d8e5f6} .datebig{font-weight:850;font-size:24px;letter-spacing:-.03em;margin-top:4px} .planner{display:grid;gap:9px;margin-top:14px} .planrow{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:center;padding:10px 11px;background:#fff;border:1px solid var(--line);border-radius:14px} .planrow input[type=checkbox]{width:22px;height:22px;accent-color:var(--accent)} .planrow input[type=text]{width:100%;border:0;background:transparent;outline:0;color:var(--ink);font-weight:650} .planrow.done input[type=text]{text-decoration:line-through;color:#98a2b3}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px} .quick a{text-decoration:none;padding:12px;border-radius:14px;background:#f7f8fb;border:1px solid var(--line);font-weight:800;font-size:13px} .meter{height:10px;background:#edf0f5;border-radius:999px;overflow:hidden} .meter i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#8b5cf6);width:0;border-radius:inherit;transition:.2s width} .subject-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px} .subject{padding:14px;border-radius:17px;border:1px solid var(--line);background:#fff} .level{font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.07em;color:#667085;margin-bottom:2px} .range{width:100%;accent-color:var(--accent);margin-top:12px} .pct{font-weight:850;font-variant-numeric:tabular-nums}
+.filters{display:flex;gap:8px;overflow:auto;padding:4px 0 1px;scrollbar-width:none} .filters::-webkit-scrollbar{display:none} .filter{border:0;background:#eef0f4;color:#475467;border-radius:999px;padding:9px 12px;font-size:12px;font-weight:800;white-space:nowrap} .filter.active{background:var(--nav);color:#fff} .exam{padding:0;overflow:hidden} .examHead{width:100%;border:0;background:transparent;text-align:left;padding:15px 16px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;color:var(--ink)} .examHead strong{display:block;font-size:16px} .examMeta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px} .chev{font-size:20px;color:#667085;transition:transform .2s} .examBody{display:block;padding:0 16px 16px;border-top:1px solid var(--line)} .js .examBody{display:none} .js .exam.open .examBody{display:block} .js .exam.open .chev{transform:rotate(180deg)} .kv{display:grid;grid-template-columns:90px 1fr;gap:8px;padding:8px 0;border-bottom:1px dashed #e8eaf0;font-size:13px} .kv:last-of-type{border-bottom:0} .kv b{color:#475467} .resource{display:inline-flex;margin-top:9px;color:#4653c9;font-weight:800;text-decoration:none}
+.timeline{display:grid;gap:10px;margin-top:14px} .phase{display:grid;grid-template-columns:8px 1fr;gap:12px} .rail{background:#e5e7eb;border-radius:999px} .phase.current .rail{background:linear-gradient(var(--accent),#8b5cf6)} .phase .box{padding:13px 14px;border:1px solid var(--line);background:#fff;border-radius:16px} .phase.current .box{border-color:#c8cdfd;box-shadow:0 8px 24px rgba(91,110,225,.12)} .phase h3{font-size:15px;margin:0 0 4px} .phase p{font-size:12px;color:var(--muted);margin:0} .phase ul{margin:9px 0 0;padding-left:18px;font-size:13px} .phase li+li{margin-top:4px} .month-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px} .month{border:1px solid var(--line);background:#fff;border-radius:15px;padding:12px;min-height:100px} .month strong{font-size:13px} .month em{display:block;font-style:normal;font-size:12px;margin-top:8px;color:#475467}
+.resourceList,.sourceList{display:grid;gap:8px;margin-top:12px} .resourceList a,.sourceList a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px;text-decoration:none;background:#fff;font-size:13px} .resourceList small,.sourceList small{display:block;color:var(--muted);margin-top:3px} .callout{padding:13px 14px;border-radius:15px;background:#fff9ed;border:1px solid #f7dfa9;font-size:13px;color:#6c4a04} .callout.info{background:#f1f5ff;border-color:#dce3ff;color:#334155}
+.nav{position:fixed;z-index:50;left:50%;transform:translateX(-50%);bottom:var(--safe);width:min(95%,620px);display:grid;grid-template-columns:repeat(5,1fr);background:rgba(15,23,42,.96);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:6px;box-shadow:0 16px 40px rgba(15,23,42,.28);backdrop-filter:blur(18px)} .nav a{text-decoration:none;color:#aeb8ca;border-radius:14px;padding:9px 3px;font-size:9.5px;font-weight:800;display:grid;gap:3px;place-items:center} .nav a span:first-child{font-size:18px} .nav a.active{background:#fff;color:#111827} .reset{border:1px solid #ffd4dc;background:#fff5f7;color:#a41134;border-radius:12px;padding:9px 11px;font-weight:800}
+.noscript{margin:12px 14px;padding:12px;border-radius:12px;background:#fff4d6;border:1px solid #f2d183;color:#6b4d00;font-size:13px} :focus-visible{outline:3px solid #93a0ff;outline-offset:2px} .hidden{display:none!important}
+@media(min-width:700px){.app{padding-left:22px;padding-right:22px} .hero{margin-left:-22px;margin-right:-22px;padding-left:28px;padding-right:28px} .hero-grid{grid-template-columns:repeat(3,1fr)} .scorecard.wide{grid-column:auto} .grid.two{grid-template-columns:1.05fr .95fr} .subject-grid{grid-template-columns:repeat(2,1fr)} .month-grid{grid-template-columns:repeat(4,1fr)} .quick{grid-template-columns:repeat(4,1fr)} h1{font-size:36px} .card{padding:19px} .nav{bottom:18px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<noscript><div class="noscript">Mode lecture : toutes les informations restent visibles, mais les filtres et la mémorisation de progression nécessitent JavaScript.</div></noscript>
+<div class="app">
+<header class="hero">
+  <div class="eyebrow">Bac général • Session 2027</div>
+  <h1>Mon Bac 2027</h1>
+  <p>Voir ce qui compte aujourd'hui, suivre l'avancement et garder les épreuves importantes sous contrôle.</p>
+  <div class="hero-grid">
+    <div class="scorecard"><strong>100</strong><span>coefficients obligatoires</span></div>
+    <div class="scorecard"><strong>60 / 40</strong><span>terminales / ponctuelles</span></div>
+    <div class="scorecard wide"><strong id="nextCountdown">—</strong><span id="nextCountdownLabel">prochaine échéance</span></div>
+  </div>
+</header>
+<main>
+<section id="today" class="section active">
+  <div class="grid two">
+    <article class="card today">
+      <div class="level">Aujourd'hui</div><div class="datebig" id="todayLabel">Mon plan du jour</div><div class="sub">Trois choses maximum. Tu peux modifier les lignes.</div>
+      <div class="planner" id="dailyPlanner">
+        <label class="planrow"><input type="checkbox" data-day-check="0"><input type="text" data-day-task="0" value="Avancer le cours CNED prioritaire"></label>
+        <label class="planrow"><input type="checkbox" data-day-check="1"><input type="text" data-day-task="1" value="Faire une séance Maths Première"></label>
+        <label class="planrow"><input type="checkbox" data-day-check="2"><input type="text" data-day-task="2" value="Faire une séance Français / révision ciblée"></label>
+      </div>
+      <div class="quick"><a href="#exams">Voir les épreuves</a><a href="#plan">Voir le planning</a><a href="#resources">Sujets & ressources</a><a href="#progress">Ma progression</a></div>
+    </article>
+    <article class="card">
+      <div class="row"><div><h2>Cette semaine</h2><div class="sub">Les trois blocs à protéger en priorité.</div></div><span class="pill accent" id="weekLabel">semaine</span></div>
+      <div class="planner" id="weekPlanner">
+        <label class="planrow"><input type="checkbox" data-week-check="0"><input type="text" data-week-task="0" value="SES / HGGSP : garder le rythme Terminale"></label>
+        <label class="planrow"><input type="checkbox" data-week-check="1"><input type="text" data-week-task="1" value="Maths Première : 2 à 3 séances"></label>
+        <label class="planrow"><input type="checkbox" data-week-check="2"><input type="text" data-week-task="2" value="Français Première : 1 à 2 séances"></label>
+      </div>
+    </article>
+  </div>
+  <div class="callout" style="margin-top:12px"><strong>Point administratif :</strong> le scénario « tout en 2027 » reste conditionné à l'autorisation du SIEC pour présenter les épreuves anticipées en Terminale (CINEAT01).</div>
+</section>
+
+<section id="progress" class="section">
+  <article class="card">
+    <div class="row"><div><h2>Ma progression</h2><div class="sub">Fais glisser les curseurs. Les valeurs restent sur cet appareil.</div></div><span class="pill green"><span id="globalPct">0</span>%</span></div>
+    <div class="meter" style="margin-top:14px"><i id="globalMeter"></i></div>
+    <div class="subject-grid"><div class="subject progress-card" data-subject="ses"><div class="row"><div><div class="level">Progression</div><h3>SES</h3></div><span class="pct" data-pct>35%</span></div><input class="range" type="range" min="0" max="100" step="5" value="35" aria-label="Progression SES" data-range></div>
+<div class="subject progress-card" data-subject="hggsp"><div class="row"><div><div class="level">Progression</div><h3>HGGSP</h3></div><span class="pct" data-pct>35%</span></div><input class="range" type="range" min="0" max="100" step="5" value="35" aria-label="Progression HGGSP" data-range></div>
+<div class="subject progress-card" data-subject="maths"><div class="row"><div><div class="level">Progression</div><h3>Maths 1re</h3></div><span class="pct" data-pct>20%</span></div><input class="range" type="range" min="0" max="100" step="5" value="20" aria-label="Progression Maths 1re" data-range></div>
+<div class="subject progress-card" data-subject="fr"><div class="row"><div><div class="level">Progression</div><h3>Français</h3></div><span class="pct" data-pct>15%</span></div><input class="range" type="range" min="0" max="100" step="5" value="15" aria-label="Progression Français" data-range></div>
+<div class="subject progress-card" data-subject="philo"><div class="row"><div><div class="level">Progression</div><h3>Philo</h3></div><span class="pct" data-pct>10%</span></div><input class="range" type="range" min="0" max="100" step="5" value="10" aria-label="Progression Philo" data-range></div>
+<div class="subject progress-card" data-subject="hg"><div class="row"><div><div class="level">Progression</div><h3>HG 1re</h3></div><span class="pct" data-pct>10%</span></div><input class="range" type="range" min="0" max="100" step="5" value="10" aria-label="Progression HG 1re" data-range></div>
+<div class="subject progress-card" data-subject="sci"><div class="row"><div><div class="level">Progression</div><h3>Sciences</h3></div><span class="pct" data-pct>10%</span></div><input class="range" type="range" min="0" max="100" step="5" value="10" aria-label="Progression Sciences" data-range></div>
+<div class="subject progress-card" data-subject="lv"><div class="row"><div><div class="level">Progression</div><h3>Langues</h3></div><span class="pct" data-pct>20%</span></div><input class="range" type="range" min="0" max="100" step="5" value="20" aria-label="Progression Langues" data-range></div></div>
+  </article>
+  <article class="card" style="margin-top:12px">
+    <h2>Les 4 blocs à protéger</h2><div class="subject-grid"><div class="subject"><div class="level">A — structurant</div><h3>SES + HGGSP</h3><div class="sub">32 coefficients. Priorité Terminale.</div></div><div class="subject"><div class="level">A — structurant</div><h3>Maths Première</h3><div class="sub">10 coefficients cumulés. Le même travail sert deux épreuves.</div></div><div class="subject"><div class="level">A — structurant</div><h3>Français Première</h3><div class="sub">10 coefficients. Écrit + oral.</div></div><div class="subject"><div class="level">B — régulier</div><h3>Philo + Grand oral</h3><div class="sub">16 coefficients. À monter progressivement.</div></div></div>
+  </article>
+</section>
+
+<section id="exams" class="section">
+  <article class="card"><div class="row"><div><h2>Toutes les épreuves</h2><div class="sub">Touchez une matière pour ouvrir le détail.</div></div><span class="pill">100 coef.</span></div><div class="filters" id="filters" style="margin-top:12px"><button class="filter active" data-filter="all">Tout</button><button class="filter" data-filter="final">Terminales / anticipées</button><button class="filter" data-filter="cc">Ponctuelles 40 %</button><button class="filter" data-filter="A">Priorité A</button></div></article>
+  <div class="grid" id="examList" style="margin-top:12px"><article class="exam card" data-exam data-group="final" data-priority="A">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">anticipée • priorité A</span><strong>Français écrit</strong><span class="examMeta"><span class="pill">coef. 5</span><span class="pill accent">4 h — écrit</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Programme de Première — EAF session 2027</span></div>
+        <div class="kv"><b>Date</b><span>15 juin 2027 • 8h–12h</span></div>
+        <div class="kv"><b>À retenir</b><span>Commentaire ou dissertation selon le sujet. Préparer les œuvres et parcours correspondant à la session 2027.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/5706/les-epreuves-terminales-du-baccalaureat-general" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="final" data-priority="A">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">anticipée • priorité A</span><strong>Français oral</strong><span class="examMeta"><span class="pill">coef. 5</span><span class="pill accent">20 min + 30 min de préparation</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Programme de Première + récapitulatif des textes</span></div>
+        <div class="kv"><b>Date</b><span>Date fixée par le SIEC</span></div>
+        <div class="kv"><b>À retenir</b><span>Explication linéaire, grammaire et entretien. Le récapitulatif doit être conforme aux règles de la session 2027.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/5706/les-epreuves-terminales-du-baccalaureat-general" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="final" data-priority="A">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">anticipée • priorité A</span><strong>Mathématiques anticipées</strong><span class="examMeta"><span class="pill">coef. 2</span><span class="pill accent">2 h — écrit</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Programme de Première correspondant à l’inscription</span></div>
+        <div class="kv"><b>Date</b><span>21 juin 2027 • 8h–10h</span></div>
+        <div class="kv"><b>À retenir</b><span>Format session 2027 : automatismes + exercices. Sans calculatrice. Le référentiel exact applicable à un passage différé doit être confirmé avec le SIEC.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/5688/epreuve-anticipee-de-mathematiques-aux-baccalaureats-general-et-technologique" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="final" data-priority="A">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">finale • priorité A</span><strong>SES</strong><span class="examMeta"><span class="pill">coef. 16</span><span class="pill accent">4 h — écrit</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>9 questions évaluables de Terminale en 2027</span></div>
+        <div class="kv"><b>Date</b><span>16–18 juin 2027 selon convocation</span></div>
+        <div class="kv"><b>À retenir</b><span>Épreuve terminale majeure. Travail à faire sur définitions, mécanismes, données, dissertation et épreuve composée.</span></div>
+        <a class="resource" href="https://www.education.gouv.fr/bo/2026/Special4/MENE2622656N" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="final" data-priority="A">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">finale • priorité A</span><strong>HGGSP</strong><span class="examMeta"><span class="pill">coef. 16</span><span class="pill accent">4 h — écrit</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>4 thèmes évaluables en 2027 : 2, 4, 5 et 6</span></div>
+        <div class="kv"><b>Date</b><span>16–18 juin 2027 selon convocation</span></div>
+        <div class="kv"><b>À retenir</b><span>Faire la guerre / faire la paix ; patrimoine ; environnement ; connaissance. Dissertation + étude critique de documents.</span></div>
+        <a class="resource" href="https://www.education.gouv.fr/bo/2026/Special4/MENE2622655N" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="final" data-priority="B">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">finale • priorité B</span><strong>Philosophie</strong><span class="examMeta"><span class="pill">coef. 8</span><span class="pill accent">4 h — écrit</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Programme de Terminale</span></div>
+        <div class="kv"><b>Date</b><span>14 juin 2027 • 8h–12h</span></div>
+        <div class="kv"><b>À retenir</b><span>Construire progressivement les notions, exemples et méthodes. Ne pas attendre le printemps pour commencer les plans.</span></div>
+        <a class="resource" href="https://www.education.gouv.fr/reussir-au-lycee/baccalaureat-brevet-cap-le-calendrier-2027-341384" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="final" data-priority="B">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">finale • priorité B</span><strong>Grand oral</strong><span class="examMeta"><span class="pill">coef. 8</span><span class="pill accent">20 min + 20 min de préparation</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Questions liées à SES / HGGSP</span></div>
+        <div class="kv"><b>Date</b><span>21 juin → 2 juillet 2027</span></div>
+        <div class="kv"><b>À retenir</b><span>Choisir 2–3 pistes tôt, puis stabiliser les deux questions. Les connaissances SES/HGGSP doivent servir l’argumentation.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/5706/les-epreuves-terminales-du-baccalaureat-general" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="cc" data-priority="A">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">ponctuelle • priorité A</span><strong>Maths spécialité abandonnée</strong><span class="examMeta"><span class="pill">coef. 8</span><span class="pill green">2 h — écrit</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Spécialité Mathématiques de Première uniquement</span></div>
+        <div class="kv"><b>Date</b><span>À partir du 25 mai 2027</span></div>
+        <div class="kv"><b>À retenir</b><span>2 à 4 exercices indépendants couvrant différents contenus du programme. Gros coefficient : préparation structurée indispensable.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/sites/default/files/document/ndsevaluations-ponctuelles-eds-non-poursuivi-voie-g-juin-2025pdf-100575.pdf" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="cc" data-priority="B">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">ponctuelle • priorité B</span><strong>Histoire-géographie</strong><span class="examMeta"><span class="pill">coef. 6</span><span class="pill green">2 h — écrit</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Première + Terminale en série unique de fin de cycle</span></div>
+        <div class="kv"><b>Date</b><span>À partir du 25 mai 2027</span></div>
+        <div class="kv"><b>À retenir</b><span>Le bloc le plus étendu. Travailler les ponts entre les programmes : 1914-1945, République/empire, métropolisation, espaces productifs, Chine.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/5694/candidats-individuels-au-baccalaureat-general-et-au-baccalaureat-technologique" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="cc" data-priority="C">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">ponctuelle • priorité C</span><strong>LVA</strong><span class="examMeta"><span class="pill">coef. 6</span><span class="pill green">1h30 écrit + 10 min oral</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Cycle terminal — Première + Terminale selon modalité</span></div>
+        <div class="kv"><b>Date</b><span>À partir du 25 mai 2027</span></div>
+        <div class="kv"><b>À retenir</b><span>Miser sur les compétences de compréhension/expression et préparer précisément les axes requis à l’oral.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/5664/modalites-d-evaluation-de-langues-vivantes-aux-baccalaureats-general-et-technologique-et-attestation-de-langues" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="cc" data-priority="C">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">ponctuelle • priorité C</span><strong>LVB</strong><span class="examMeta"><span class="pill">coef. 6</span><span class="pill green">1h30 écrit + 10 min oral</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Cycle terminal — Première + Terminale selon modalité</span></div>
+        <div class="kv"><b>Date</b><span>À partir du 25 mai 2027</span></div>
+        <div class="kv"><b>À retenir</b><span>Même logique que LVA : pratique régulière, vocabulaire par axe, entraînements oraux courts.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/5664/modalites-d-evaluation-de-langues-vivantes-aux-baccalaureats-general-et-technologique-et-attestation-de-langues" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="cc" data-priority="C">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">ponctuelle • priorité C</span><strong>Enseignement scientifique</strong><span class="examMeta"><span class="pill">coef. 6</span><span class="pill green">2 h — écrit</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Première + Terminale</span></div>
+        <div class="kv"><b>Date</b><span>À partir du 25 mai 2027</span></div>
+        <div class="kv"><b>À retenir</b><span>Préparer surtout l’exploitation de documents, les calculs et l’argumentation scientifique. Les thèmes de Première doivent être synthétisés.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/5694/candidats-individuels-au-baccalaureat-general-et-au-baccalaureat-technologique" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="cc" data-priority="C">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">ponctuelle • priorité C</span><strong>EPS</strong><span class="examMeta"><span class="pill">coef. 6</span><span class="pill green">2 activités pratiques</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Deux champs d’apprentissage distincts</span></div>
+        <div class="kv"><b>Date</b><span>Date fixée par le SIEC</span></div>
+        <div class="kv"><b>À retenir</b><span>À planifier selon les activités retenues et la convocation. Préparation pratique plutôt que bachotage de cours.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/5694/candidats-individuels-au-baccalaureat-general-et-au-baccalaureat-technologique" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article>
+<article class="exam card" data-exam data-group="cc" data-priority="C">
+      <button class="examHead" type="button" aria-expanded="false">
+        <span><span class="level">ponctuelle • priorité C</span><strong>EMC</strong><span class="examMeta"><span class="pill">coef. 2</span><span class="pill green">1 h — écrit</span></span></span>
+        <span class="chev" aria-hidden="true">⌄</span>
+      </button>
+      <div class="examBody">
+        <div class="kv"><b>Périmètre</b><span>Première + Terminale</span></div>
+        <div class="kv"><b>Date</b><span>À partir du 25 mai 2027</span></div>
+        <div class="kv"><b>À retenir</b><span>Petit coefficient : préparation compacte et cadrée, avec principes, exemples et argumentation.</span></div>
+        <a class="resource" href="https://eduscol.education.gouv.fr/5694/candidats-individuels-au-baccalaureat-general-et-au-baccalaureat-technologique" target="_blank" rel="noopener">Source officielle ↗</a>
+      </div>
+    </article></div>
+</section>
+
+<section id="plan" class="section">
+  <article class="card"><h2>Planning jusqu'au bac</h2><div class="sub">La Terminale CNED reste la colonne vertébrale. La Première s'ajoute de façon ciblée.</div><div class="timeline"><div class="phase" data-start="2026-09-18" data-end="2026-11-08"><div class="rail"></div><div class="box"><div class="row"><h3>Installer le système</h3><span class="pill accent current-tag" hidden>maintenant</span></div><p>Administration + démarrage des deux gros blocs de Première.</p><ul><li>Cyclades / CINEAT01</li><li>Maths Première : bases solides</li><li>Français : module session 2027</li><li>HG Première : Première Guerre mondiale + bases de géographie</li></ul></div></div>
+<div class="phase" data-start="2026-11-09" data-end="2026-12-31"><div class="rail"></div><div class="box"><div class="row"><h3>Couvrir sans se disperser</h3><span class="pill accent current-tag" hidden>maintenant</span></div><p>Continuer la Terminale CNED et avancer méthodiquement en Première.</p><ul><li>Maths 1re : viser 50–60 % fin décembre</li><li>Français : 2 objets d’étude solides</li><li>SES/HGGSP : progression régulière</li><li>HG / sciences / langues en rotation</li></ul></div></div>
+<div class="phase" data-start="2027-01-01" data-end="2027-03-31"><div class="rail"></div><div class="box"><div class="row"><h3>Finir le contenu → passer en mode examen</h3><span class="pill accent current-tag" hidden>maintenant</span></div><p>Les cours se ferment progressivement. Les sujets chronométrés commencent.</p><ul><li>Maths 1re : cours fini fin février</li><li>Français : corpus et méthodes stables</li><li>SES : 9 questions prêtes</li><li>HGGSP : 4 thèmes prêts</li><li>HG : fiches Première en version examen</li></ul></div></div>
+<div class="phase" data-start="2027-04-01" data-end="2027-05-24"><div class="rail"></div><div class="box"><div class="row"><h3>Verrouillage du bloc 40 %</h3><span class="pill accent current-tag" hidden>maintenant</span></div><p>Plus de nouveau chapitre de Première à l’approche des ponctuelles.</p><ul><li>Sujets complets</li><li>Oral langues</li><li>Sciences / EMC cadrés</li><li>Maths et français en consolidation</li></ul></div></div>
+<div class="phase" data-start="2027-05-25" data-end="2027-06-13"><div class="rail"></div><div class="box"><div class="row"><h3>Ponctuelles + protection des grosses épreuves</h3><span class="pill accent current-tag" hidden>maintenant</span></div><p>Passer les convocations SIEC sans laisser tomber SES/HGGSP et philo.</p><ul><li>Rappels actifs SES/HGGSP</li><li>Philo : plans / notions</li><li>Français + maths : entretien régulier</li><li>Grand oral : entraînements courts</li></ul></div></div>
+<div class="phase" data-start="2027-06-14" data-end="2027-07-02"><div class="rail"></div><div class="box"><div class="row"><h3>Session nationale</h3><span class="pill accent current-tag" hidden>maintenant</span></div><p>Les épreuves finales s’enchaînent. Rappels courts et automatismes.</p><ul><li>14 juin : Philosophie</li><li>15 juin : Français écrit</li><li>16–18 juin : SES / HGGSP</li><li>21 juin : Maths anticipées</li><li>21 juin → 2 juillet : Grand oral</li></ul></div></div></div></article>
+  <article class="card" style="margin-top:12px"><h2>Vue mois par mois</h2><div class="month-grid"><div class="month"><strong>Sept.–Oct.</strong><em>Maths : démarrage • Français : corpus • HG : WWI + géo • administratif</em></div>
+<div class="month"><strong>Nov.</strong><em>Maths 30–40 % • HGGSP thèmes 2/4 • Science 1 • LV axe 1</em></div>
+<div class="month"><strong>Déc.</strong><em>Maths 50–60 % • HGGSP thèmes 5/6 • HG histoire 3–4 • LV axe 2</em></div>
+<div class="month"><strong>Jan.</strong><em>Maths 70 % • SES 6–7 questions • HG géo 1–2 • LV axe 3</em></div>
+<div class="month"><strong>Fév.</strong><em>Maths 100 % cours • Français presque stable • SES 9 questions • HGGSP prêt</em></div>
+<div class="month"><strong>Mars</strong><em>Sujets • oraux • HG 2 h • LV axe 5 • EMC</em></div>
+<div class="month"><strong>Avril</strong><em>Chronométré partout • correction systématique</em></div>
+<div class="month"><strong>Mai</strong><em>Consolidation • bloc 40 % prêt avant les convocations</em></div>
+<div class="month"><strong>Juin</strong><em>Philo • Français • SES • HGGSP • Maths • Grand oral</em></div></div></article>
+</section>
+
+<section id="resources" class="section">
+  <article class="card"><h2>Sujets & ressources</h2><div class="sub">Peu de liens, mais les bons. Commencer par les formats officiels et sujets zéro.</div><div class="resourceList"><a href="https://eduscol.education.gouv.fr/5688/epreuve-anticipee-de-mathematiques-aux-baccalaureats-general-et-technologique" target="_blank" rel="noopener"><span><strong>Maths Première</strong><small>Sujets zéro + définition de l’épreuve anticipée</small></span><span aria-hidden="true">↗</span></a>
+<a href="https://www.education.gouv.fr/bo/2026/Special4/MENE2622656N" target="_blank" rel="noopener"><span><strong>SES 2027</strong><small>Programme limitatif officiel de la session</small></span><span aria-hidden="true">↗</span></a>
+<a href="https://www.education.gouv.fr/bo/2026/Special4/MENE2622655N" target="_blank" rel="noopener"><span><strong>HGGSP 2027</strong><small>4 thèmes évaluables : 2, 4, 5 et 6</small></span><span aria-hidden="true">↗</span></a>
+<a href="https://eduscol.education.gouv.fr/5694/candidats-individuels-au-baccalaureat-general-et-au-baccalaureat-technologique" target="_blank" rel="noopener"><span><strong>Candidats individuels</strong><small>Cadre officiel des évaluations ponctuelles</small></span><span aria-hidden="true">↗</span></a>
+<a href="https://eduscol.education.gouv.fr/5706/les-epreuves-terminales-du-baccalaureat-general" target="_blank" rel="noopener"><span><strong>Épreuves terminales</strong><small>Formats, coefficients et définitions</small></span><span aria-hidden="true">↗</span></a></div></article>
+  <article class="card" style="margin-top:12px"><h2>Sources officielles</h2><div class="sub">Pour vérifier les règles administratives et les éventuelles mises à jour.</div><div class="sourceList"><a href="https://siec.education.fr/agenda/inscriptions-epreuves-de-terminales-session-2027" target="_blank" rel="noopener"><strong>SIEC — Inscriptions Terminale 2027</strong><small>7 octobre → 8 novembre 2026</small></a>
+<a href="https://siec.education.fr/candidats/docutheque/autorisation-de-passer-les-epreuves-anticipees-en-terminale-cineat01" target="_blank" rel="noopener"><strong>SIEC — CINEAT01</strong><small>Autorisation à présenter les épreuves anticipées en Terminale</small></a>
+<a href="https://eduscol.education.gouv.fr/5694/candidats-individuels-au-baccalaureat-general-et-au-baccalaureat-technologique" target="_blank" rel="noopener"><strong>Éduscol — Candidats individuels</strong><small>Évaluations ponctuelles, coefficients et série unique fin de cycle</small></a>
+<a href="https://eduscol.education.gouv.fr/5706/les-epreuves-terminales-du-baccalaureat-general" target="_blank" rel="noopener"><strong>Éduscol — Épreuves terminales</strong><small>Coefficients, durées et formats</small></a>
+<a href="https://eduscol.education.gouv.fr/5688/epreuve-anticipee-de-mathematiques-aux-baccalaureats-general-et-technologique" target="_blank" rel="noopener"><strong>Éduscol — Maths anticipées</strong><small>Définition + sujets zéro</small></a>
+<a href="https://www.education.gouv.fr/bo/2026/Special4/MENE2622656N" target="_blank" rel="noopener"><strong>BO 2026 — SES session 2027</strong><small>Programme et format officiels</small></a>
+<a href="https://www.education.gouv.fr/bo/2026/Special4/MENE2622655N" target="_blank" rel="noopener"><strong>BO 2026 — HGGSP session 2027</strong><small>4 thèmes évaluables et format officiel</small></a>
+<a href="https://www.education.gouv.fr/reussir-au-lycee/baccalaureat-brevet-cap-le-calendrier-2027-341384" target="_blank" rel="noopener"><strong>Calendrier national 2027</strong><small>Dates officielles des épreuves</small></a></div></article>
+  <article class="card" style="margin-top:12px"><div class="row"><div><h2>Mes données</h2><div class="sub">Planning, cases cochées et progression restent uniquement dans ce navigateur.</div></div><button class="reset" type="button" id="resetBtn">Réinitialiser</button></div></article>
+</section>
+</main>
+</div>
+<nav class="nav" aria-label="Navigation principale">
+  <a class="active" href="#today" data-go="today"><span>⌂</span><span>Aujourd'hui</span></a>
+  <a href="#progress" data-go="progress"><span>◔</span><span>Progression</span></a>
+  <a href="#exams" data-go="exams"><span>◎</span><span>Épreuves</span></a>
+  <a href="#plan" data-go="plan"><span>▦</span><span>Planning</span></a>
+  <a href="#resources" data-go="resources"><span>↗</span><span>Ressources</span></a>
+</nav>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const memory={
+ get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},
+ set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}},
+ del(k){try{localStorage.removeItem(k)}catch(e){}}
+};
+function go(id,scroll=true){
+  $$('.section').forEach(s=>s.classList.toggle('active',s.id===id));
+  $$('.nav a').forEach(a=>a.classList.toggle('active',a.dataset.go===id));
+  if(scroll) window.scrollTo({top:0,behavior:'smooth'});
+}
+$$('.nav a,.quick a').forEach(a=>a.addEventListener('click',e=>{const id=(a.getAttribute('href')||'').replace('#','');if(['today','progress','exams','plan','resources'].includes(id)){e.preventDefault();history.replaceState(null,'','#'+id);go(id)}}));
+function initRoute(){const id=location.hash.slice(1);go(['today','progress','exams','plan','resources'].includes(id)?id:'today',false)}
+function initDate(){const d=new Date();$('#todayLabel').textContent=d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});const onejan=new Date(d.getFullYear(),0,1);const week=Math.ceil((((d-onejan)/86400000)+onejan.getDay()+1)/7);$('#weekLabel').textContent='sem. '+week}
+function initPlanner(prefix,count){
+  const state=memory.get('bac2027.v2.'+prefix,{tasks:[],done:[]});
+  for(let i=0;i<count;i++){const t=$(`[data-${prefix}-task="${i}"]`), c=$(`[data-${prefix}-check="${i}"]`); if(state.tasks[i])t.value=state.tasks[i];c.checked=!!state.done[i];c.closest('.planrow').classList.toggle('done',c.checked);
+    const save=()=>{const s=memory.get('bac2027.v2.'+prefix,{tasks:[],done:[]});s.tasks[i]=t.value;s.done[i]=c.checked;memory.set('bac2027.v2.'+prefix,s);c.closest('.planrow').classList.toggle('done',c.checked)};t.addEventListener('change',save);t.addEventListener('blur',save);c.addEventListener('change',save)}
+}
+function initProgress(){const state=memory.get('bac2027.v2.progress',{});$$('.progress-card').forEach(card=>{const key=card.dataset.subject,range=card.querySelector('[data-range]'),pct=card.querySelector('[data-pct]');if(state[key]!=null)range.value=state[key];const update=()=>{pct.textContent=range.value+'%';state[key]=Number(range.value);memory.set('bac2027.v2.progress',state);updateGlobal()};range.addEventListener('input',update);update()})}
+function updateGlobal(){const vals=$$('.progress-card [data-range]').map(x=>Number(x.value));const avg=Math.round(vals.reduce((a,b)=>a+b,0)/Math.max(1,vals.length));$('#globalPct').textContent=avg;$('#globalMeter').style.width=avg+'%'}
+$$('.examHead').forEach(b=>b.addEventListener('click',()=>{const card=b.closest('.exam');card.classList.toggle('open');b.setAttribute('aria-expanded',card.classList.contains('open'))}));
+$$('[data-filter]').forEach(b=>b.addEventListener('click',()=>{$$('[data-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.filter;$$('[data-exam]').forEach(e=>e.classList.toggle('hidden',!(f==='all'||e.dataset.group===f||e.dataset.priority===f)))}));
+function markCurrentPhase(){const now=new Date();$$('.phase').forEach(p=>{const a=new Date(p.dataset.start+'T00:00:00'),b=new Date(p.dataset.end+'T23:59:59'),cur=now>=a&&now<=b;p.classList.toggle('current',cur);p.querySelector('.current-tag').hidden=!cur})}
+function countdown(){const now=new Date(),events=[[new Date('2026-10-07T00:00:00'),'ouverture des inscriptions Terminale'],[new Date('2026-11-08T23:59:59'),'fin des inscriptions Terminale'],[new Date('2027-05-25T00:00:00'),'début possible des évaluations ponctuelles'],[new Date('2027-06-14T08:00:00'),'philosophie'],[new Date('2027-06-15T08:00:00'),'français écrit'],[new Date('2027-06-21T08:00:00'),'mathématiques anticipées']];const e=events.find(x=>x[0]>now);if(!e){$('#nextCountdown').textContent='Session en cours';$('#nextCountdownLabel').textContent='';return}const days=Math.ceil((e[0]-now)/86400000);$('#nextCountdown').textContent=days+' j';$('#nextCountdownLabel').textContent='avant '+e[1]}
+$('#resetBtn').addEventListener('click',()=>{if(confirm('Réinitialiser le planning, les cases cochées et la progression ?')){['day','week','progress'].forEach(k=>memory.del('bac2027.v2.'+k));location.reload()}});
+initRoute();initDate();initPlanner('day',3);initPlanner('week',3);initProgress();markCurrentPhase();countdown();
+</script>
+</body>
+</html>
