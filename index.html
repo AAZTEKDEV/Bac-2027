@@ -4,7 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111827">\n<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">\n<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
-<title>Mon Bac 2027 — V2.2</title>
+<title>Mon Bac 2027 — V3</title>
+<script src="./exercise-bank.js"></script>
 <script>document.documentElement.classList.add('js')</script>
 <style>
 :root{--bg:#f5f7fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e7eaf0;--nav:#111827;--accent:#5b6ee1;--accent2:#14b8a6;--soft:#eef1ff;--green:#e9fbf7;--warn:#fff7e6;--shadow:0 10px 30px rgba(15,23,42,.08);--r:20px;--safe:max(12px,env(safe-area-inset-bottom))}
@@ -45,6 +46,25 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
 .bankitem{padding:13px;border:1px solid var(--line);border-radius:15px;background:#fff}
 .bankitem strong{display:block;font-size:14px}.bankitem p{font-size:12px;color:var(--muted);margin:4px 0 8px}
 .bankitem a{text-decoration:none;color:#4653c9;font-weight:800;font-size:12px}
+.exercise-toolbar{display:grid;gap:9px;margin-top:13px}
+.exercise-toolbar select,.exercise-toolbar button{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px 11px;background:#fff;color:var(--ink);font-weight:700}
+.exercise-toolbar button{background:var(--nav);color:#fff;border-color:var(--nav)}
+.exercise-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}
+.exercise-stat{padding:11px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.exercise-stat strong{display:block;font-size:20px}.exercise-stat span{font-size:11px;color:var(--muted)}
+.exercise-list{display:grid;gap:10px;margin-top:12px}
+.exercise-card{border:1px solid var(--line);border-radius:17px;background:#fff;padding:14px}
+.exercise-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.exercise-title{font-weight:850;font-size:15px}.exercise-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.exercise-prompt{margin:12px 0 0;font-size:14px;line-height:1.5}
+.exercise-solution{margin-top:10px;padding:10px 11px;background:#f7f8fb;border:1px solid var(--line);border-radius:12px;font-size:13px}
+.exercise-actions{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.statusbtn{border:1px solid var(--line);background:#fff;color:#344054;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:850}
+.statusbtn.active{background:#111827;color:#fff;border-color:#111827}
+.exercise-empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;background:#fff}
+.daily-exercise{margin-top:12px;padding:13px;border-radius:15px;background:linear-gradient(135deg,#f5f3ff,#eefcf8);border:1px solid #ddd8ff}
+.daily-exercise .prompt{font-size:13px;margin-top:7px;color:#344054}
+@media(min-width:700px){.exercise-toolbar{grid-template-columns:repeat(5,1fr)}.exercise-toolbar button{width:auto}.exercise-stats{grid-template-columns:repeat(4,1fr)}}
 @media(min-width:700px){.bankgrid{grid-template-columns:repeat(2,1fr)}}
 .noscript{margin:12px 14px;padding:12px;border-radius:12px;background:#fff4d6;border:1px solid #f2d183;color:#6b4d00;font-size:13px} :focus-visible{outline:3px solid #93a0ff;outline-offset:2px} .hidden{display:none!important}
 @media(min-width:700px){.app{padding-left:22px;padding-right:22px} .hero{margin-left:-22px;margin-right:-22px;padding-left:28px;padding-right:28px} .hero-grid{grid-template-columns:repeat(3,1fr)} .scorecard.wide{grid-column:auto} .grid.two{grid-template-columns:1.05fr .95fr} .subject-grid{grid-template-columns:repeat(2,1fr)} .month-grid{grid-template-columns:repeat(4,1fr)} .quick{grid-template-columns:repeat(4,1fr)} h1{font-size:36px} .card{padding:19px} .nav{bottom:18px}}
@@ -132,7 +152,7 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
         </div>
       </details>
       <div id="todayStudyLog" class="studylog" aria-live="polite"></div>
-      <div class="quick"><a href="#exams">Voir les épreuves</a><a href="#plan">Voir le planning</a><a href="#resources">Sujets & ressources</a><a href="#progress">Ma progression</a></div>
+      <div class="quick"><a href="#exams">Voir les épreuves</a><a href="#plan">Voir le planning</a><a href="#bank">Exercices ciblés</a><a href="#progress">Ma progression</a></div>
     </article>
     <article class="card">
       <div class="row"><div><h2>Cette semaine</h2><div class="sub">Les trois blocs à protéger en priorité.</div></div><span class="pill accent" id="weekLabel">semaine</span></div>
@@ -143,7 +163,15 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
       </div>
     </article>
   </div>
-  <div class="callout" style="margin-top:12px"><strong>Point administratif :</strong> le scénario « tout en 2027 » reste conditionné à l'autorisation du SIEC pour présenter les épreuves anticipées en Terminale (CINEAT01).</div>
+  <article id="dailyExercise" class="daily-exercise">
+      <div class="row"><div><div class="level">Exercice ciblé du jour</div><strong id="dailyExerciseTitle">Chargement…</strong></div><span class="pill accent" id="dailyExerciseTime">—</span></div>
+      <div class="prompt" id="dailyExercisePrompt"></div>
+      <div class="exercise-actions">
+        <button type="button" class="primarybtn" id="openDailyExercise">Faire l’exercice</button>
+        <button type="button" class="ghostbtn" id="changeDailyExercise">Un autre</button>
+      </div>
+    </article>
+    <div class="callout" style="margin-top:12px"><strong>Point administratif :</strong> le scénario « tout en 2027 » reste conditionné à l'autorisation du SIEC pour présenter les épreuves anticipées en Terminale (CINEAT01).</div>
   <div class="callout info" style="margin-top:10px"><strong>Repère CNED :</strong> les intitulés du bloc « Aujourd’hui » sont pour l’instant alignés sur le programme officiel. Dès que le sommaire des cours CNED est importé, ils pourront afficher exactement « Module → Séquence → partie du cours → exercice » et ouvrir le bon lien CNED.</div>
 </section>
 
@@ -359,6 +387,37 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
 <div class="month"><strong>Juin</strong><em>Philo • Français • SES • HGGSP • Maths • Grand oral</em></div></div></article>
 </section>
 
+<section id="bank" class="section">
+  <article class="card">
+    <div class="row"><div><h2>Ma banque d’entraînement</h2><div class="sub">Exercices ciblés pour son parcours, classés par matière, chapitre, difficulté et format.</div></div><span class="pill accent" id="exerciseCount">0 exercices</span></div>
+    <div class="exercise-stats">
+      <div class="exercise-stat"><strong id="statTodo">0</strong><span>à faire</span></div>
+      <div class="exercise-stat"><strong id="statDone">0</strong><span>réussis</span></div>
+      <div class="exercise-stat"><strong id="statReview">0</strong><span>à revoir</span></div>
+      <div class="exercise-stat"><strong id="statHard">0</strong><span>difficiles</span></div>
+    </div>
+    <div class="exercise-toolbar">
+      <select id="bankSubject"><option value="">Toutes les matières</option></select>
+      <select id="bankChapter"><option value="">Tous les chapitres</option></select>
+      <select id="bankLevel">
+        <option value="">Tous niveaux</option>
+        <option value="1">Niveau 1</option>
+        <option value="2">Niveau 2</option>
+        <option value="3">Niveau 3</option>
+      </select>
+      <select id="bankStatus">
+        <option value="">Tous statuts</option>
+        <option value="todo">À faire</option>
+        <option value="done">Réussi</option>
+        <option value="review">À revoir</option>
+        <option value="hard">Difficile</option>
+      </select>
+      <button type="button" id="pickExercise">Me proposer un exercice</button>
+    </div>
+    <div id="exerciseList" class="exercise-list"></div>
+  </article>
+</section>
+
 <section id="resources" class="section">
   <article class="card"><h2>Sujets & ressources</h2><div class="sub">Peu de liens, mais les bons. Commencer par les formats officiels et sujets zéro.</div><div class="resourceList"><a href="https://eduscol.education.gouv.fr/5688/epreuve-anticipee-de-mathematiques-aux-baccalaureats-general-et-technologique" target="_blank" rel="noopener"><span><strong>Maths Première</strong><small>Sujets zéro + définition de l’épreuve anticipée</small></span><span aria-hidden="true">↗</span></a>
 <a href="https://www.education.gouv.fr/bo/2026/Special4/MENE2622656N" target="_blank" rel="noopener"><span><strong>SES 2027</strong><small>Programme limitatif officiel de la session</small></span><span aria-hidden="true">↗</span></a>
@@ -396,7 +455,7 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
   <a href="#progress" data-go="progress"><span>◔</span><span>Progression</span></a>
   <a href="#exams" data-go="exams"><span>◎</span><span>Épreuves</span></a>
   <a href="#plan" data-go="plan"><span>▦</span><span>Planning</span></a>
-  <a href="#resources" data-go="resources"><span>↗</span><span>Ressources</span></a>
+  <a href="#bank" data-go="bank"><span>✦</span><span>Exercices</span></a>
 </nav>
 <script>
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -410,8 +469,8 @@ function go(id,scroll=true){
   $$('.nav a').forEach(a=>a.classList.toggle('active',a.dataset.go===id));
   if(scroll) window.scrollTo({top:0,behavior:'smooth'});
 }
-$$('.nav a,.quick a').forEach(a=>a.addEventListener('click',e=>{const id=(a.getAttribute('href')||'').replace('#','');if(['today','progress','exams','plan','resources'].includes(id)){e.preventDefault();history.replaceState(null,'','#'+id);go(id)}}));
-function initRoute(){const id=location.hash.slice(1);go(['today','progress','exams','plan','resources'].includes(id)?id:'today',false)}
+$$('.nav a,.quick a').forEach(a=>a.addEventListener('click',e=>{const id=(a.getAttribute('href')||'').replace('#','');if(['today','progress','exams','plan','bank','resources'].includes(id)){e.preventDefault();history.replaceState(null,'','#'+id);go(id)}}));
+function initRoute(){const id=location.hash.slice(1);go(['today','progress','exams','plan','bank','resources'].includes(id)?id:'today',false)}
 function initDate(){const d=new Date();$('#todayLabel').textContent=d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});const onejan=new Date(d.getFullYear(),0,1);const week=Math.ceil((((d-onejan)/86400000)+onejan.getDay()+1)/7);$('#weekLabel').textContent='sem. '+week}
 function initPlanner(prefix,count){
   const state=memory.get('bac2027.v2.'+prefix,{tasks:[],done:[]});
@@ -454,8 +513,96 @@ $('#saveAltWork').addEventListener('click',()=>{
 });
 $('#clearAltWork').addEventListener('click',clearAltForm);
 
-$('#resetBtn').addEventListener('click',()=>{if(confirm('Réinitialiser le planning, les cases cochées et la progression ?')){['day','week','progress','studylog'].forEach(k=>memory.del('bac2027.v2.'+k));location.reload()}});
-initRoute();initDate();initPlanner('day',3);initPlanner('week',3);initProgress();renderStudyLog();markCurrentPhase();countdown();
+
+const EXERCISES=Array.isArray(window.BAC_EXERCISES)?window.BAC_EXERCISES:[];
+const EXKEY='bac2027.v3.exerciseProgress';
+function exState(){return memory.get(EXKEY,{})}
+function saveExState(s){memory.set(EXKEY,s)}
+function exStatus(id){return exState()[id]?.status||'todo'}
+function setExStatus(id,status){
+  const s=exState();s[id]={...(s[id]||{}),status,lastAttempt:new Date().toISOString()};saveExState(s);renderExerciseBank();renderExerciseStats();renderDailyExercise();
+}
+function renderExerciseStats(){
+  const s=exState();let done=0,review=0,hard=0;
+  EXERCISES.forEach(x=>{const st=s[x.id]?.status||'todo';if(st==='done')done++;else if(st==='review')review++;else if(st==='hard')hard++});
+  const todo=Math.max(0,EXERCISES.length-done-review-hard);
+  if($('#statTodo'))$('#statTodo').textContent=todo;
+  if($('#statDone'))$('#statDone').textContent=done;
+  if($('#statReview'))$('#statReview').textContent=review;
+  if($('#statHard'))$('#statHard').textContent=hard;
+  if($('#exerciseCount'))$('#exerciseCount').textContent=EXERCISES.length+' exercices';
+}
+function populateBankFilters(){
+  const subjects=[...new Set(EXERCISES.map(x=>x.subject))].sort();
+  $('#bankSubject').innerHTML='<option value="">Toutes les matières</option>'+subjects.map(x=>'<option>'+esc(x)+'</option>').join('');
+  updateChapterFilter();
+}
+function updateChapterFilter(){
+  const subject=$('#bankSubject').value;
+  const chapters=[...new Set(EXERCISES.filter(x=>!subject||x.subject===subject).map(x=>x.chapter))].sort();
+  const cur=$('#bankChapter').value;
+  $('#bankChapter').innerHTML='<option value="">Tous les chapitres</option>'+chapters.map(x=>'<option>'+esc(x)+'</option>').join('');
+  if(chapters.includes(cur))$('#bankChapter').value=cur;
+}
+function filteredExercises(){
+  const sub=$('#bankSubject').value,chap=$('#bankChapter').value,lvl=$('#bankLevel').value,stat=$('#bankStatus').value;
+  return EXERCISES.filter(x=>(!sub||x.subject===sub)&&(!chap||x.chapter===chap)&&(!lvl||String(x.level)===lvl)&&(!stat||exStatus(x.id)===stat));
+}
+function renderExerciseBank(limit=50){
+  const list=filteredExercises().slice(0,limit),root=$('#exerciseList');
+  if(!root)return;
+  if(!list.length){root.innerHTML='<div class="exercise-empty">Aucun exercice avec ces filtres.</div>';return}
+  root.innerHTML=list.map(x=>{
+    const st=exStatus(x.id),labels={todo:'À faire',done:'Réussi',review:'À revoir',hard:'Difficile'};
+    return '<article class="exercise-card" id="ex-'+esc(x.id)+'">'+
+      '<div class="exercise-top"><div><div class="level">'+esc(x.subject)+'</div><div class="exercise-title">'+esc(x.chapter)+'</div></div><span class="pill">'+x.minutes+' min</span></div>'+
+      '<div class="exercise-meta"><span class="pill accent">Niveau '+x.level+'</span><span class="pill">'+esc(x.type)+'</span><span class="pill">'+esc(labels[st])+'</span></div>'+
+      '<div class="exercise-prompt">'+esc(x.prompt)+'</div>'+
+      '<details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">'+esc(x.solution)+'</div></details>'+
+      '<div class="exercise-actions">'+
+        ['done','review','hard'].map(k=>'<button type="button" class="statusbtn '+(st===k?'active':'')+'" data-ex-status="'+k+'" data-ex-id="'+esc(x.id)+'">'+({done:'Réussi',review:'À revoir',hard:'Difficile'})[k]+'</button>').join('')+
+      '</div></article>'
+  }).join('');
+  $('[data-ex-status]').forEach(b=>b.addEventListener('click',()=>setExStatus(b.dataset.exId,b.dataset.exStatus)));
+}
+function recommendedExercises(){
+  const s=exState();
+  const score=x=>{
+    const st=s[x.id]?.status||'todo';
+    const statusScore=st==='hard'?30:st==='review'?20:st==='todo'?10:-10;
+    return (x.priority||1)*10+statusScore+x.level;
+  };
+  return EXERCISES.slice().sort((a,b)=>score(b)-score(a));
+}
+let dailyExerciseId=null;
+function renderDailyExercise(forceNext=false){
+  if(!EXERCISES.length)return;
+  let pool=recommendedExercises();
+  if(forceNext&&dailyExerciseId)pool=pool.filter(x=>x.id!==dailyExerciseId);
+  const dayIndex=Math.floor(new Date().setHours(0,0,0,0)/86400000);
+  const top=pool.slice(0,Math.min(8,pool.length));
+  const ex=top[Math.abs(dayIndex+(forceNext?1:0))%top.length]||pool[0];
+  dailyExerciseId=ex.id;
+  $('#dailyExerciseTitle').textContent=ex.subject+' — '+ex.chapter;
+  $('#dailyExerciseTime').textContent=ex.minutes+' min';
+  $('#dailyExercisePrompt').textContent=ex.prompt;
+}
+function openExercise(id){
+  const ex=EXERCISES.find(x=>x.id===id);if(!ex)return;
+  go('bank');
+  $('#bankSubject').value=ex.subject;updateChapterFilter();$('#bankChapter').value=ex.chapter;$('#bankLevel').value='';$('#bankStatus').value='';renderExerciseBank();
+  setTimeout(()=>document.getElementById('ex-'+id)?.scrollIntoView({behavior:'smooth',block:'center'}),50);
+}
+function initExerciseBank(){
+  if(!EXERCISES.length)return;
+  populateBankFilters();renderExerciseStats();renderExerciseBank();renderDailyExercise();
+  ['bankSubject','bankChapter','bankLevel','bankStatus'].forEach(id=>$('#'+id).addEventListener('change',()=>{if(id==='bankSubject')updateChapterFilter();renderExerciseBank()}));
+  $('#pickExercise').addEventListener('click',()=>{const list=filteredExercises();if(!list.length)return;const weakest=list.sort((a,b)=>{const rank={hard:3,review:2,todo:1,done:0};return (rank[exStatus(b.id)]-rank[exStatus(a.id)])||((b.priority||1)-(a.priority||1))})[0];openExercise(weakest.id)});
+  $('#openDailyExercise').addEventListener('click',()=>openExercise(dailyExerciseId));
+  $('#changeDailyExercise').addEventListener('click',()=>renderDailyExercise(true));
+}
+$('#resetBtn').addEventListener('click',()=>{if(confirm('Réinitialiser le planning, les cases cochées et la progression ?')){['day','week','progress','studylog'].forEach(k=>memory.del('bac2027.v2.'+k));memory.del('bac2027.v3.exerciseProgress');location.reload()}});
+initRoute();initDate();initPlanner('day',3);initPlanner('week',3);initProgress();renderStudyLog();initExerciseBank();markCurrentPhase();countdown();
 </script>
 </body>
 </html>
