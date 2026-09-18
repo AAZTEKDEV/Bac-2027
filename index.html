@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111827">\n<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">\n<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
-<title>Mon Bac 2027 — V2</title>
+<title>Mon Bac 2027 — V2.1</title>
 <script>document.documentElement.classList.add('js')</script>
 <style>
 :root{--bg:#f5f7fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e7eaf0;--nav:#111827;--accent:#5b6ee1;--accent2:#14b8a6;--soft:#eef1ff;--green:#e9fbf7;--warn:#fff7e6;--shadow:0 10px 30px rgba(15,23,42,.08);--r:20px;--safe:max(12px,env(safe-area-inset-bottom))}
@@ -19,6 +19,16 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
 .timeline{display:grid;gap:10px;margin-top:14px} .phase{display:grid;grid-template-columns:8px 1fr;gap:12px} .rail{background:#e5e7eb;border-radius:999px} .phase.current .rail{background:linear-gradient(var(--accent),#8b5cf6)} .phase .box{padding:13px 14px;border:1px solid var(--line);background:#fff;border-radius:16px} .phase.current .box{border-color:#c8cdfd;box-shadow:0 8px 24px rgba(91,110,225,.12)} .phase h3{font-size:15px;margin:0 0 4px} .phase p{font-size:12px;color:var(--muted);margin:0} .phase ul{margin:9px 0 0;padding-left:18px;font-size:13px} .phase li+li{margin-top:4px} .month-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:12px} .month{border:1px solid var(--line);background:#fff;border-radius:15px;padding:12px;min-height:100px} .month strong{font-size:13px} .month em{display:block;font-style:normal;font-size:12px;margin-top:8px;color:#475467}
 .resourceList,.sourceList{display:grid;gap:8px;margin-top:12px} .resourceList a,.sourceList a{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:14px;text-decoration:none;background:#fff;font-size:13px} .resourceList small,.sourceList small{display:block;color:var(--muted);margin-top:3px} .callout{padding:13px 14px;border-radius:15px;background:#fff9ed;border:1px solid #f7dfa9;font-size:13px;color:#6c4a04} .callout.info{background:#f1f5ff;border-color:#dce3ff;color:#334155}
 .nav{position:fixed;z-index:50;left:50%;transform:translateX(-50%);bottom:var(--safe);width:min(95%,620px);display:grid;grid-template-columns:repeat(5,1fr);background:rgba(15,23,42,.96);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:6px;box-shadow:0 16px 40px rgba(15,23,42,.28);backdrop-filter:blur(18px)} .nav a{text-decoration:none;color:#aeb8ca;border-radius:14px;padding:9px 3px;font-size:9.5px;font-weight:800;display:grid;gap:3px;place-items:center} .nav a span:first-child{font-size:18px} .nav a.active{background:#fff;color:#111827} .reset{border:1px solid #ffd4dc;background:#fff5f7;color:#a41134;border-radius:12px;padding:9px 11px;font-weight:800}
+.current-tag[hidden]{display:none!important}
+.taskcopy{min-width:0}.taskcopy input[type=text]{font-weight:800!important}
+.taskdetail{font-size:12px;color:#667085;margin-top:4px;line-height:1.45}
+.tasklinks{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
+.tasklink{display:inline-flex;text-decoration:none;padding:6px 9px;border-radius:999px;background:#eef1ff;color:#4653c9;font-size:11px;font-weight:800}
+.bankgrid{display:grid;grid-template-columns:1fr;gap:9px;margin-top:12px}
+.bankitem{padding:13px;border:1px solid var(--line);border-radius:15px;background:#fff}
+.bankitem strong{display:block;font-size:14px}.bankitem p{font-size:12px;color:var(--muted);margin:4px 0 8px}
+.bankitem a{text-decoration:none;color:#4653c9;font-weight:800;font-size:12px}
+@media(min-width:700px){.bankgrid{grid-template-columns:repeat(2,1fr)}}
 .noscript{margin:12px 14px;padding:12px;border-radius:12px;background:#fff4d6;border:1px solid #f2d183;color:#6b4d00;font-size:13px} :focus-visible{outline:3px solid #93a0ff;outline-offset:2px} .hidden{display:none!important}
 @media(min-width:700px){.app{padding-left:22px;padding-right:22px} .hero{margin-left:-22px;margin-right:-22px;padding-left:28px;padding-right:28px} .hero-grid{grid-template-columns:repeat(3,1fr)} .scorecard.wide{grid-column:auto} .grid.two{grid-template-columns:1.05fr .95fr} .subject-grid{grid-template-columns:repeat(2,1fr)} .month-grid{grid-template-columns:repeat(4,1fr)} .quick{grid-template-columns:repeat(4,1fr)} h1{font-size:36px} .card{padding:19px} .nav{bottom:18px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
@@ -43,9 +53,30 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
     <article class="card today">
       <div class="level">Aujourd'hui</div><div class="datebig" id="todayLabel">Mon plan du jour</div><div class="sub">Trois choses maximum. Tu peux modifier les lignes.</div>
       <div class="planner" id="dailyPlanner">
-        <label class="planrow"><input type="checkbox" data-day-check="0"><input type="text" data-day-task="0" value="Avancer le cours CNED prioritaire"></label>
-        <label class="planrow"><input type="checkbox" data-day-check="1"><input type="text" data-day-task="1" value="Faire une séance Maths Première"></label>
-        <label class="planrow"><input type="checkbox" data-day-check="2"><input type="text" data-day-task="2" value="Faire une séance Français / révision ciblée"></label>
+        <label class="planrow">
+          <input type="checkbox" data-day-check="0">
+          <div class="taskcopy">
+            <input type="text" data-day-task="0" value="Maths Première — Algèbre : second degré">
+            <div class="taskdetail"><strong>À revoir :</strong> formes développée et canonique, discriminant, racines, signe d’un trinôme, équations et inéquations. <strong>Application :</strong> 10–15 automatismes + 2 exercices.</div>
+            <div class="tasklinks"><a class="tasklink" href="https://www.lumni.fr/lycee/premiere/mathematiques/algebre" target="_blank" rel="noopener">Cours + quiz Lumni ↗</a><a class="tasklink" href="https://eduscol.education.gouv.fr/5688/epreuve-anticipee-de-mathematiques-aux-baccalaureats-general-et-technologique" target="_blank" rel="noopener">Sujets zéro ↗</a></div>
+          </div>
+        </label>
+        <label class="planrow">
+          <input type="checkbox" data-day-check="1">
+          <div class="taskcopy">
+            <input type="text" data-day-task="1" value="Français Première — Méthode : commentaire">
+            <div class="taskdetail"><strong>À revoir :</strong> lecture du texte, procédés, problématique, construction du plan, introduction. <strong>Application :</strong> rédiger 1 introduction + 1 plan détaillé.</div>
+            <div class="tasklinks"><a class="tasklink" href="https://www.lumni.fr/dossier/l-ecrit-du-bac-de-francais" target="_blank" rel="noopener">Méthode + exercices ↗</a></div>
+          </div>
+        </label>
+        <label class="planrow">
+          <input type="checkbox" data-day-check="2">
+          <div class="taskcopy">
+            <input type="text" data-day-task="2" value="HGGSP Terminale — Thème 2 : Faire la guerre, faire la paix">
+            <div class="taskdetail"><strong>À revoir :</strong> axe 1, dimension politique de la guerre ; guerre interétatique, guerre irrégulière, Clausewitz. <strong>Application :</strong> fiche 10 notions + 1 plan de dissertation.</div>
+            <div class="tasklinks"><a class="tasklink" href="https://www.lumni.fr/dossier/revisions-bac-histoire-geographie-geopolitique-et-sciences-politiques" target="_blank" rel="noopener">Cours HGGSP ↗</a></div>
+          </div>
+        </label>
       </div>
       <div class="quick"><a href="#exams">Voir les épreuves</a><a href="#plan">Voir le planning</a><a href="#resources">Sujets & ressources</a><a href="#progress">Ma progression</a></div>
     </article>
@@ -59,6 +90,7 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
     </article>
   </div>
   <div class="callout" style="margin-top:12px"><strong>Point administratif :</strong> le scénario « tout en 2027 » reste conditionné à l'autorisation du SIEC pour présenter les épreuves anticipées en Terminale (CINEAT01).</div>
+  <div class="callout info" style="margin-top:10px"><strong>Repère CNED :</strong> les intitulés du bloc « Aujourd’hui » sont pour l’instant alignés sur le programme officiel. Dès que le sommaire des cours CNED est importé, ils pourront afficher exactement « Module → Séquence → partie du cours → exercice » et ouvrir le bon lien CNED.</div>
 </section>
 
 <section id="progress" class="section">
@@ -275,6 +307,20 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
 <a href="https://www.education.gouv.fr/bo/2026/Special4/MENE2622655N" target="_blank" rel="noopener"><span><strong>HGGSP 2027</strong><small>4 thèmes évaluables : 2, 4, 5 et 6</small></span><span aria-hidden="true">↗</span></a>
 <a href="https://eduscol.education.gouv.fr/5694/candidats-individuels-au-baccalaureat-general-et-au-baccalaureat-technologique" target="_blank" rel="noopener"><span><strong>Candidats individuels</strong><small>Cadre officiel des évaluations ponctuelles</small></span><span aria-hidden="true">↗</span></a>
 <a href="https://eduscol.education.gouv.fr/5706/les-epreuves-terminales-du-baccalaureat-general" target="_blank" rel="noopener"><span><strong>Épreuves terminales</strong><small>Formats, coefficients et définitions</small></span><span aria-hidden="true">↗</span></a></div></article>
+  <article class="card" style="margin-top:12px">
+    <h2>Banque d’entraînement</h2>
+    <div class="sub">Cours, quiz, sujets zéro et annales. Cette base peut ensuite être indexée chapitre par chapitre avec le CNED.</div>
+    <div class="bankgrid">
+      <div class="bankitem"><strong>Maths Première</strong><p>Algèbre, analyse, géométrie, probabilités, automatismes + sujets zéro.</p><a href="https://www.lumni.fr/dossier/revisions-bac-mathematiques-1" target="_blank" rel="noopener">Révisions Lumni ↗</a></div>
+      <div class="bankitem"><strong>Français Première</strong><p>Œuvres, méthodes de commentaire/dissertation, grammaire, quiz et entraînements.</p><a href="https://www.lumni.fr/lycee/premiere/francais?page=1" target="_blank" rel="noopener">Cours et quiz ↗</a></div>
+      <div class="bankitem"><strong>SES Terminale</strong><p>Notions, quiz, vidéos et entraînements sur les chapitres évaluables.</p><a href="https://www.lumni.fr/dossier/revisions-bac-economie" target="_blank" rel="noopener">Révisions SES ↗</a></div>
+      <div class="bankitem"><strong>HGGSP Terminale</strong><p>Thèmes, méthodes de dissertation et étude critique, sujets et corrigés.</p><a href="https://www.lumni.fr/dossier/revisions-bac-histoire-geographie-geopolitique-et-sciences-politiques" target="_blank" rel="noopener">Révisions HGGSP ↗</a></div>
+      <div class="bankitem"><strong>Philosophie</strong><p>17 notions, repères, auteurs, exercices de dissertation et explication de texte.</p><a href="https://www.lumni.fr/lycee/terminale/philosophie" target="_blank" rel="noopener">Révisions Philo ↗</a></div>
+      <div class="bankitem"><strong>Annales officielles</strong><p>Sujets des sessions précédentes publiés par l’Éducation nationale.</p><a href="https://eduscol.education.gouv.fr/5199/annales-des-epreuves-du-baccalaureat-des-voies-generale-et-technologique" target="_blank" rel="noopener">Annales Éduscol ↗</a></div>
+      <div class="bankitem"><strong>HG · Sciences · Langues · EMC</strong><p>Quiz Première multi-matières pour les blocs de contrôle continu / ponctuels.</p><a href="https://www.lumni.fr/lycee/premiere/bac/les-quiz" target="_blank" rel="noopener">Quiz par matière ↗</a></div>
+      <div class="bankitem"><strong>Exercices personnalisés</strong><p>On peut ajouter au site nos propres séries corrigées, classées par chapitre, difficulté et format d’épreuve.</p><span class="pill accent">à construire après mapping CNED</span></div>
+    </div>
+  </article>
   <article class="card" style="margin-top:12px"><h2>Sources officielles</h2><div class="sub">Pour vérifier les règles administratives et les éventuelles mises à jour.</div><div class="sourceList"><a href="https://siec.education.fr/agenda/inscriptions-epreuves-de-terminales-session-2027" target="_blank" rel="noopener"><strong>SIEC — Inscriptions Terminale 2027</strong><small>7 octobre → 8 novembre 2026</small></a>
 <a href="https://siec.education.fr/candidats/docutheque/autorisation-de-passer-les-epreuves-anticipees-en-terminale-cineat01" target="_blank" rel="noopener"><strong>SIEC — CINEAT01</strong><small>Autorisation à présenter les épreuves anticipées en Terminale</small></a>
 <a href="https://eduscol.education.gouv.fr/5694/candidats-individuels-au-baccalaureat-general-et-au-baccalaureat-technologique" target="_blank" rel="noopener"><strong>Éduscol — Candidats individuels</strong><small>Évaluations ponctuelles, coefficients et série unique fin de cycle</small></a>
