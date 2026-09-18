@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#111827">\n<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">\n<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
-<title>Mon Bac 2027 — V2.1</title>
+<title>Mon Bac 2027 — V2.2</title>
 <script>document.documentElement.classList.add('js')</script>
 <style>
 :root{--bg:#f5f7fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e7eaf0;--nav:#111827;--accent:#5b6ee1;--accent2:#14b8a6;--soft:#eef1ff;--green:#e9fbf7;--warn:#fff7e6;--shadow:0 10px 30px rgba(15,23,42,.08);--r:20px;--safe:max(12px,env(safe-area-inset-bottom))}
@@ -24,6 +24,23 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
 .taskdetail{font-size:12px;color:#667085;margin-top:4px;line-height:1.45}
 .tasklinks{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px}
 .tasklink{display:inline-flex;text-decoration:none;padding:6px 9px;border-radius:999px;background:#eef1ff;color:#4653c9;font-size:11px;font-weight:800}
+.altwork{margin-top:14px;padding:13px;border:1px dashed #cfd5e3;border-radius:15px;background:#fbfcff}
+.altwork summary{cursor:pointer;font-weight:850;color:#344054;list-style:none}
+.altwork summary::-webkit-details-marker{display:none}
+.altwork summary:after{content:"＋";float:right;color:#667085}
+.altwork[open] summary:after{content:"−"}
+.altgrid{display:grid;gap:9px;margin-top:12px}
+.altgrid select,.altgrid input,.altgrid textarea{width:100%;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);padding:10px 11px;outline:none}
+.altgrid textarea{min-height:72px;resize:vertical}
+.altrow{display:grid;grid-template-columns:1fr 110px;gap:8px}
+.altactions{display:flex;gap:8px;flex-wrap:wrap}
+.primarybtn{border:0;background:var(--nav);color:#fff;border-radius:12px;padding:10px 12px;font-weight:850}
+.ghostbtn{border:1px solid var(--line);background:#fff;color:#344054;border-radius:12px;padding:10px 12px;font-weight:800}
+.studylog{display:grid;gap:8px;margin-top:10px}
+.logitem{padding:11px 12px;border:1px solid var(--line);border-radius:13px;background:#fff}
+.logitem strong{font-size:13px}.logitem small{display:block;color:var(--muted);margin-top:3px}
+.logitem .logmeta{display:flex;gap:6px;flex-wrap:wrap;margin-top:7px}
+@media(min-width:700px){.altgrid{grid-template-columns:1fr 1fr}.altgrid .wide{grid-column:1/-1}}
 .bankgrid{display:grid;grid-template-columns:1fr;gap:9px;margin-top:12px}
 .bankitem{padding:13px;border:1px solid var(--line);border-radius:15px;background:#fff}
 .bankitem strong{display:block;font-size:14px}.bankitem p{font-size:12px;color:var(--muted);margin:4px 0 8px}
@@ -78,6 +95,43 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
           </div>
         </label>
       </div>
+      <details class="altwork" id="altWorkBox">
+        <summary>J’ai travaillé autre chose</summary>
+        <div class="sub" style="margin-top:6px">Déclare une matière ou un périmètre différent du planning. Cela comptera dans ton journal de travail.</div>
+        <div class="altgrid">
+          <select id="altSubject" aria-label="Matière travaillée">
+            <option value="">Choisir la matière</option>
+            <option>Maths Première</option>
+            <option>Français Première</option>
+            <option>SES Terminale</option>
+            <option>HGGSP Terminale</option>
+            <option>Philosophie</option>
+            <option>Histoire-géographie</option>
+            <option>LVA</option>
+            <option>LVB</option>
+            <option>Enseignement scientifique</option>
+            <option>EMC</option>
+            <option>EPS</option>
+            <option>Grand oral</option>
+            <option>Autre</option>
+          </select>
+          <input id="altScope" type="text" placeholder="Chapitre / thème / partie du cours">
+          <div class="altrow wide">
+            <input id="altDuration" type="number" min="5" step="5" inputmode="numeric" placeholder="Durée (min)">
+            <select id="altFeeling" aria-label="Ressenti">
+              <option value="fait">Fait</option>
+              <option value="à revoir">À revoir</option>
+              <option value="difficile">Difficile</option>
+            </select>
+          </div>
+          <textarea id="altNote" class="wide" placeholder="Exercice, pages, notion travaillée, commentaire…"></textarea>
+          <div class="altactions wide">
+            <button type="button" class="primarybtn" id="saveAltWork">Enregistrer</button>
+            <button type="button" class="ghostbtn" id="clearAltWork">Effacer</button>
+          </div>
+        </div>
+      </details>
+      <div id="todayStudyLog" class="studylog" aria-live="polite"></div>
       <div class="quick"><a href="#exams">Voir les épreuves</a><a href="#plan">Voir le planning</a><a href="#resources">Sujets & ressources</a><a href="#progress">Ma progression</a></div>
     </article>
     <article class="card">
@@ -105,6 +159,10 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
 <div class="subject progress-card" data-subject="hg"><div class="row"><div><div class="level">Progression</div><h3>HG 1re</h3></div><span class="pct" data-pct>10%</span></div><input class="range" type="range" min="0" max="100" step="5" value="10" aria-label="Progression HG 1re" data-range></div>
 <div class="subject progress-card" data-subject="sci"><div class="row"><div><div class="level">Progression</div><h3>Sciences</h3></div><span class="pct" data-pct>10%</span></div><input class="range" type="range" min="0" max="100" step="5" value="10" aria-label="Progression Sciences" data-range></div>
 <div class="subject progress-card" data-subject="lv"><div class="row"><div><div class="level">Progression</div><h3>Langues</h3></div><span class="pct" data-pct>20%</span></div><input class="range" type="range" min="0" max="100" step="5" value="20" aria-label="Progression Langues" data-range></div></div>
+  </article>
+  <article class="card" style="margin-top:12px">
+    <div class="row"><div><h2>Journal de travail</h2><div class="sub">Les matières réellement travaillées, même si elles n’étaient pas prévues.</div></div><span class="pill green" id="studyLogCount">0 séance</span></div>
+    <div id="progressStudyLog" class="studylog"></div>
   </article>
   <article class="card" style="margin-top:12px">
     <h2>Les 4 blocs à protéger</h2><div class="subject-grid"><div class="subject"><div class="level">A — structurant</div><h3>SES + HGGSP</h3><div class="sub">32 coefficients. Priorité Terminale.</div></div><div class="subject"><div class="level">A — structurant</div><h3>Maths Première</h3><div class="sub">10 coefficients cumulés. Le même travail sert deux épreuves.</div></div><div class="subject"><div class="level">A — structurant</div><h3>Français Première</h3><div class="sub">10 coefficients. Écrit + oral.</div></div><div class="subject"><div class="level">B — régulier</div><h3>Philo + Grand oral</h3><div class="sub">16 coefficients. À monter progressivement.</div></div></div>
@@ -366,8 +424,38 @@ $$('.examHead').forEach(b=>b.addEventListener('click',()=>{const card=b.closest(
 $$('[data-filter]').forEach(b=>b.addEventListener('click',()=>{$$('[data-filter]').forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.filter;$$('[data-exam]').forEach(e=>e.classList.toggle('hidden',!(f==='all'||e.dataset.group===f||e.dataset.priority===f)))}));
 function markCurrentPhase(){const now=new Date();$$('.phase').forEach(p=>{const a=new Date(p.dataset.start+'T00:00:00'),b=new Date(p.dataset.end+'T23:59:59'),cur=now>=a&&now<=b;p.classList.toggle('current',cur);p.querySelector('.current-tag').hidden=!cur})}
 function countdown(){const now=new Date(),events=[[new Date('2026-10-07T00:00:00'),'ouverture des inscriptions Terminale'],[new Date('2026-11-08T23:59:59'),'fin des inscriptions Terminale'],[new Date('2027-05-25T00:00:00'),'début possible des évaluations ponctuelles'],[new Date('2027-06-14T08:00:00'),'philosophie'],[new Date('2027-06-15T08:00:00'),'français écrit'],[new Date('2027-06-21T08:00:00'),'mathématiques anticipées']];const e=events.find(x=>x[0]>now);if(!e){$('#nextCountdown').textContent='Session en cours';$('#nextCountdownLabel').textContent='';return}const days=Math.ceil((e[0]-now)/86400000);$('#nextCountdown').textContent=days+' j';$('#nextCountdownLabel').textContent='avant '+e[1]}
-$('#resetBtn').addEventListener('click',()=>{if(confirm('Réinitialiser le planning, les cases cochées et la progression ?')){['day','week','progress'].forEach(k=>memory.del('bac2027.v2.'+k));location.reload()}});
-initRoute();initDate();initPlanner('day',3);initPlanner('week',3);initProgress();markCurrentPhase();countdown();
+
+function studyLogKey(){return 'bac2027.v2.studylog'}
+function getStudyLog(){return memory.get(studyLogKey(),[])}
+function saveStudyLog(list){memory.set(studyLogKey(),list)}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function renderStudyLog(){
+  const list=getStudyLog().slice().reverse();
+  const today=new Date().toISOString().slice(0,10);
+  const render=(target,items,limit)=>{
+    if(!target)return;
+    const shown=items.slice(0,limit);
+    target.innerHTML=shown.length?shown.map(x=>`<div class="logitem"><strong>${esc(x.subject)} — ${esc(x.scope||'travail libre')}</strong><small>${esc(x.dateLabel)}${x.duration?' • '+x.duration+' min':''}${x.note?' • '+esc(x.note):''}</small><div class="logmeta"><span class="pill">${esc(x.feeling)}</span></div></div>`).join(''):'';
+  };
+  render($('#todayStudyLog'),list.filter(x=>x.date===today),3);
+  render($('#progressStudyLog'),list,8);
+  if($('#studyLogCount')) $('#studyLogCount').textContent=list.length+' '+(list.length>1?'séances':'séance');
+}
+function clearAltForm(){
+  $('#altSubject').value='';$('#altScope').value='';$('#altDuration').value='';$('#altFeeling').value='fait';$('#altNote').value='';
+}
+$('#saveAltWork').addEventListener('click',()=>{
+  const subject=$('#altSubject').value.trim(),scope=$('#altScope').value.trim(),duration=Number($('#altDuration').value||0),feeling=$('#altFeeling').value,note=$('#altNote').value.trim();
+  if(!subject){alert('Choisis la matière travaillée.');return}
+  if(!scope){alert('Précise le chapitre, le thème ou la partie du cours.');return}
+  const d=new Date(),date=d.toISOString().slice(0,10),dateLabel=d.toLocaleDateString('fr-FR',{day:'numeric',month:'short'});
+  const list=getStudyLog();list.push({id:Date.now(),date,dateLabel,subject,scope,duration,feeling,note});saveStudyLog(list);
+  clearAltForm();renderStudyLog();$('#altWorkBox').open=false;
+});
+$('#clearAltWork').addEventListener('click',clearAltForm);
+
+$('#resetBtn').addEventListener('click',()=>{if(confirm('Réinitialiser le planning, les cases cochées et la progression ?')){['day','week','progress','studylog'].forEach(k=>memory.del('bac2027.v2.'+k));location.reload()}});
+initRoute();initDate();initPlanner('day',3);initPlanner('week',3);initProgress();renderStudyLog();markCurrentPhase();countdown();
 </script>
 </body>
 </html>
