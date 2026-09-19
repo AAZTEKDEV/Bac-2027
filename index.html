@@ -563,7 +563,7 @@ window.BAC_EXERCISES = [
 ];
 
 </script>
-<script>document.documentElement.classList.add('js')</script>
+<script>/* Progressive enhancement: 'js' class is added only after successful app init. */</script>
 <style>
 :root{--bg:#f5f7fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e7eaf0;--nav:#111827;--accent:#5b6ee1;--accent2:#14b8a6;--soft:#eef1ff;--green:#e9fbf7;--warn:#fff7e6;--shadow:0 10px 30px rgba(15,23,42,.08);--r:20px;--safe:max(12px,env(safe-area-inset-bottom))}
 *{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;background:linear-gradient(180deg,#edf1f9 0,#f8f9fc 260px);color:var(--ink);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-font-smoothing:antialiased}
@@ -721,8 +721,8 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
     </article>
   </div>
   <article id="dailyExercise" class="daily-exercise">
-      <div class="row"><div><div class="level">Exercice ciblé du jour</div><strong id="dailyExerciseTitle">Exercice du jour</strong></div><span class="pill accent" id="dailyExerciseTime">—</span></div>
-      <div class="prompt" id="dailyExercisePrompt"></div>
+      <div class="row"><div><div class="level">Exercice ciblé du jour</div><strong id="dailyExerciseTitle">Maths Première — Second degré</strong></div><span class="pill accent" id="dailyExerciseTime">12 min</span></div>
+      <div class="prompt" id="dailyExercisePrompt">Pour f(x)=2x²−5x−3 : calcule le discriminant, les racines éventuelles et factorise f(x).</div>
       <div class="exercise-actions">
         <button type="button" class="primarybtn" id="openDailyExercise">Faire l’exercice</button>
         <button type="button" class="ghostbtn" id="changeDailyExercise">Un autre</button>
@@ -946,9 +946,9 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
 
 <section id="bank" class="section">
   <article class="card">
-    <div class="row"><div><h2>Ma banque d’entraînement</h2><div class="sub">Exercices ciblés pour son parcours, classés par matière, chapitre, difficulté et format.</div></div><span class="pill accent" id="exerciseCount">0 exercices</span></div>
+    <div class="row"><div><h2>Ma banque d’entraînement</h2><div class="sub">Exercices ciblés pour son parcours, classés par matière, chapitre, difficulté et format.</div></div><span class="pill accent" id="exerciseCount">50 exercices</span></div>
     <div class="exercise-stats">
-      <div class="exercise-stat"><strong id="statTodo">0</strong><span>à faire</span></div>
+      <div class="exercise-stat"><strong id="statTodo">50</strong><span>à faire</span></div>
       <div class="exercise-stat"><strong id="statDone">0</strong><span>réussis</span></div>
       <div class="exercise-stat"><strong id="statReview">0</strong><span>à revoir</span></div>
       <div class="exercise-stat"><strong id="statHard">0</strong><span>difficiles</span></div>
@@ -971,7 +971,657 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
       </select>
       <button type="button" id="pickExercise">Me proposer un exercice</button>
     </div>
-    <div id="exerciseList" class="exercise-list"></div>
+    <div id="exerciseList" class="exercise-list">
+<article class="exercise-card" id="ex-m2-01">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Second degré</div></div>
+    <span class="pill">12 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 1</span>
+    <span class="pill">Automatismes</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Pour f(x)=2x²−5x−3 : calcule le discriminant, les racines éventuelles et factorise f(x).</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Δ=25+24=49. Racines : x=(5±7)/4, donc x=3 et x=−1/2. Ainsi f(x)=2(x−3)(x+1/2)=(2x+1)(x−3).</div></details>
+</article>
+<article class="exercise-card" id="ex-m2-02">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Second degré</div></div>
+    <span class="pill">18 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Application</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Résous l’inéquation −x²+5x−6 ≥ 0 et donne l’ensemble solution sous forme d’intervalle.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">−x²+5x−6=−(x−2)(x−3). La parabole est tournée vers le bas, donc l’expression est positive ou nulle entre les racines : [2;3].</div></details>
+</article>
+<article class="exercise-card" id="ex-m2-03">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Second degré</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 3</span>
+    <span class="pill">Type bac</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Une aire rectangulaire a un périmètre de 40 m. Si x est sa largeur, exprime son aire A(x), puis détermine la largeur qui maximise l’aire.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Longueur=20−x. A(x)=x(20−x)=−x²+20x. Forme canonique : A(x)=−(x−10)²+100. Maximum 100 m² pour x=10 m.</div></details>
+</article>
+<article class="exercise-card" id="ex-ms-01">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Suites</div></div>
+    <span class="pill">10 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 1</span>
+    <span class="pill">Automatismes</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Une suite arithmétique vérifie u₀=7 et raison r=−3. Calcule u₅ puis donne uₙ.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">u₅=7+5(−3)=−8. uₙ=7−3n.</div></details>
+</article>
+<article class="exercise-card" id="ex-ms-02">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Suites</div></div>
+    <span class="pill">18 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Application</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Une population augmente de 4 % par an à partir de 12 500 habitants. Modélise par une suite et estime la population après 6 ans.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Suite géométrique uₙ=12500×1,04ⁿ. u₆≈15 817 habitants.</div></details>
+</article>
+<article class="exercise-card" id="ex-md-01">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Dérivation et variations</div></div>
+    <span class="pill">12 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 1</span>
+    <span class="pill">Automatismes</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Dérive f(x)=3x³−5x²+4x−7.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">f&#39;(x)=9x²−10x+4.</div></details>
+</article>
+<article class="exercise-card" id="ex-md-02">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Dérivation et variations</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Application</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Étudie les variations de f(x)=x³−3x sur [−2;2].</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">f&#39;(x)=3x²−3=3(x−1)(x+1). f est croissante sur [−2;−1], décroissante sur [−1;1], croissante sur [1;2].</div></details>
+</article>
+<article class="exercise-card" id="ex-me-01">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Fonction exponentielle</div></div>
+    <span class="pill">18 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Application</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Résous 3e^(0,2t)=12 puis donne une valeur approchée de t.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">e^(0,2t)=4, donc 0,2t=ln4 et t=5ln4≈6,93.</div></details>
+</article>
+<article class="exercise-card" id="ex-mt-01">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Trigonométrie</div></div>
+    <span class="pill">12 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 1</span>
+    <span class="pill">Automatismes</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Donne cos(π/3), sin(π/6), puis les solutions de cos x=1/2 sur [0;2π].</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">cos(π/3)=1/2, sin(π/6)=1/2. cos x=1/2 pour x=π/3 ou 5π/3 sur [0;2π].</div></details>
+</article>
+<article class="exercise-card" id="ex-mg-01">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Produit scalaire</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Application</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Dans un repère orthonormé, A(1;2), B(4;3), C(2;−1). Calcule AB·AC et déduis si l’angle BAC est aigu, droit ou obtus.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">AB=(3;1), AC=(1;−3). Produit scalaire=3−3=0. L’angle BAC est droit.</div></details>
+</article>
+<article class="exercise-card" id="ex-mp-01">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Probabilités conditionnelles</div></div>
+    <span class="pill">18 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Application</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">On sait P(A)=0,6, P(B|A)=0,3 et P(B|Ā)=0,1. Calcule P(B).</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">P(B)=P(A)P(B|A)+P(Ā)P(B|Ā)=0,6×0,3+0,4×0,1=0,22.</div></details>
+</article>
+<article class="exercise-card" id="ex-mv-01">
+  <div class="exercise-top">
+    <div><div class="level">Maths Première</div><div class="exercise-title">Variables aléatoires</div></div>
+    <span class="pill">18 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Application</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Une variable X prend les valeurs 0, 2 et 5 avec probabilités 0,2 ; 0,5 ; 0,3. Calcule E(X).</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">E(X)=0×0,2+2×0,5+5×0,3=2,5.</div></details>
+</article>
+<article class="exercise-card" id="ex-fr-01">
+  <div class="exercise-top">
+    <div><div class="level">Français Première</div><div class="exercise-title">Commentaire</div></div>
+    <span class="pill">15 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 1</span>
+    <span class="pill">Méthode</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">À partir d’un extrait de ton cours, écris une problématique de commentaire qui ne reformule pas simplement le thème du texte.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Une bonne problématique met en tension un procédé et un effet. Modèle : « Comment l’auteur transforme-t-il [situation] en [effet / portée] grâce à [mécanisme d’écriture] ? »</div></details>
+</article>
+<article class="exercise-card" id="ex-fr-02">
+  <div class="exercise-top">
+    <div><div class="level">Français Première</div><div class="exercise-title">Commentaire</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Méthode</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Prends un texte déjà étudié et construis un plan en 2 ou 3 axes. Pour chaque axe, note 2 procédés précis et l’effet produit.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Vérifie : axes progressifs, procédés nommés précisément, citation courte ou repérage, interprétation. Aucun axe ne doit être un simple résumé.</div></details>
+</article>
+<article class="exercise-card" id="ex-fr-03">
+  <div class="exercise-top">
+    <div><div class="level">Français Première</div><div class="exercise-title">Dissertation</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Méthode</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Sur une œuvre au programme, transforme un sujet affirmatif en question problématisée puis construis un plan dialectique ou thématique.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">La problématique doit faire apparaître une difficulté réelle. Le plan doit répondre progressivement à cette difficulté et mobiliser l’œuvre ainsi que le parcours.</div></details>
+</article>
+<article class="exercise-card" id="ex-fr-04">
+  <div class="exercise-top">
+    <div><div class="level">Français Première</div><div class="exercise-title">Oral EAF</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Oral</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Choisis un texte du récapitulatif. En 8 minutes, prépare : introduction, mouvement du texte, problématique et 3 observations linéaires.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Contrôle : contextualisation brève, découpage justifié, analyse liée au texte, termes littéraires précis, conclusion répondant à la problématique.</div></details>
+</article>
+<article class="exercise-card" id="ex-fr-05">
+  <div class="exercise-top">
+    <div><div class="level">Français Première</div><div class="exercise-title">Grammaire</div></div>
+    <span class="pill">12 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 1</span>
+    <span class="pill">Automatismes</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Dans trois phrases de ton corpus, repère une proposition subordonnée, donne sa nature et sa fonction.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Méthode : identifier le mot subordonnant, isoler la proposition, déterminer sa nature (relative, conjonctive, interrogative indirecte…) puis sa fonction dans la phrase.</div></details>
+</article>
+<article class="exercise-card" id="ex-fr-06">
+  <div class="exercise-top">
+    <div><div class="level">Français Première</div><div class="exercise-title">Analyse littéraire</div></div>
+    <span class="pill">15 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 1</span>
+    <span class="pill">Automatismes</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Trouve dans un texte 5 procédés différents et, pour chacun, formule l’effet produit sans employer « ça montre que ».</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Exemples de formulations : « souligne », « accentue », « crée », « oppose », « donne à voir », « met en tension », « suggère », « produit un effet de… ».</div></details>
+</article>
+<article class="exercise-card" id="ex-fr-07">
+  <div class="exercise-top">
+    <div><div class="level">Français Première</div><div class="exercise-title">Entretien oral</div></div>
+    <span class="pill">15 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Oral</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Prépare une présentation de 2 minutes d’une œuvre choisie pour l’entretien : choix personnel, thème central, passage marquant, lien avec le parcours.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">La présentation doit être personnelle mais argumentée. Évite le résumé exhaustif ; privilégie 2 ou 3 raisons précises et illustrées.</div></details>
+</article>
+<article class="exercise-card" id="ex-ses-01">
+  <div class="exercise-top">
+    <div><div class="level">SES Terminale</div><div class="exercise-title">Croissance économique</div></div>
+    <span class="pill">18 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Question de cours</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Explique en 12 à 15 lignes comment le progrès technique peut soutenir la croissance tout en produisant des effets de destruction créatrice.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Attendus : gains de productivité, innovation de produit/procédé, croissance endogène, rentes temporaires, disparition d’activités/emplois anciens et création de nouveaux secteurs.</div></details>
+</article>
+<article class="exercise-card" id="ex-ses-02">
+  <div class="exercise-top">
+    <div><div class="level">SES Terminale</div><div class="exercise-title">Commerce international</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Plan</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Construis un plan détaillé : « Quels sont les déterminants de la spécialisation internationale ? »</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Attendus possibles : avantages comparatifs/dotations ; différenciation et commerce intra-branche ; fragmentation des chaînes de valeur et compétitivité.</div></details>
+</article>
+<article class="exercise-card" id="ex-ses-03">
+  <div class="exercise-top">
+    <div><div class="level">SES Terminale</div><div class="exercise-title">Chômage</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Application</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Distingue chômage conjoncturel et structurel, puis associe à chacun deux mécanismes explicatifs et une politique possible.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Conjoncturel : insuffisance de demande, ralentissement ; politiques de soutien de la demande. Structurel : inadéquations, rigidités, appariement ; formation, mobilité, politiques du marché du travail.</div></details>
+</article>
+<article class="exercise-card" id="ex-ses-04">
+  <div class="exercise-top">
+    <div><div class="level">SES Terminale</div><div class="exercise-title">Politiques économiques européennes</div></div>
+    <span class="pill">30 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 3</span>
+    <span class="pill">Type bac</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Explique pourquoi la coordination des politiques économiques est nécessaire dans une union monétaire.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Attendus : politique monétaire commune, interdépendances, externalités, divergences conjoncturelles, contraintes budgétaires, coordination pour stabiliser et éviter les effets de débordement.</div></details>
+</article>
+<article class="exercise-card" id="ex-ses-05">
+  <div class="exercise-top">
+    <div><div class="level">SES Terminale</div><div class="exercise-title">Structure de la société française</div></div>
+    <span class="pill">18 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Question de cours</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Présente quatre facteurs qui structurent et hiérarchisent l’espace social en France.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Exemples : PCS, revenu/patrimoine, diplôme, genre, âge/génération, lieu de résidence, composition du ménage. Il faut expliquer le mécanisme, pas seulement lister.</div></details>
+</article>
+<article class="exercise-card" id="ex-ses-06">
+  <div class="exercise-top">
+    <div><div class="level">SES Terminale</div><div class="exercise-title">Mobilité sociale</div></div>
+    <span class="pill">22 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Données</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Explique la différence entre mobilité observée et fluidité sociale, puis indique pourquoi une hausse de la mobilité observée ne signifie pas nécessairement plus d’égalité des chances.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Mobilité observée = changements de position. Fluidité = force du lien entre origine et position sociale. La structure des emplois peut accroître les déplacements sans réduire l’inégalité relative des chances.</div></details>
+</article>
+<article class="exercise-card" id="ex-ses-07">
+  <div class="exercise-top">
+    <div><div class="level">SES Terminale</div><div class="exercise-title">Travail et emploi</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Plan</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Construis un plan : « Comment les évolutions de l’organisation du travail transforment-elles les conditions de travail ? »</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Mobiliser taylorisme/fordisme, post-taylorisme, autonomie, contrôle, numérique, polarisation des effets, qualité de l’emploi et risques psychosociaux.</div></details>
+</article>
+<article class="exercise-card" id="ex-ses-08">
+  <div class="exercise-top">
+    <div><div class="level">SES Terminale</div><div class="exercise-title">Engagement politique</div></div>
+    <span class="pill">18 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Question de cours</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Montre que les formes de l’engagement politique sont diversifiées et que leurs déterminants sont multiples.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Participation conventionnelle/non conventionnelle, vote, militantisme, association, consommation engagée ; variables sociodémographiques, socialisation, compétences politiques, rétributions, contexte.</div></details>
+</article>
+<article class="exercise-card" id="ex-ses-09">
+  <div class="exercise-top">
+    <div><div class="level">SES Terminale</div><div class="exercise-title">Action publique pour l’environnement</div></div>
+    <span class="pill">30 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 3</span>
+    <span class="pill">Type bac</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Compare réglementation, taxation et marché de quotas pour réduire les externalités négatives environnementales.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Comparer principe, incitations, information nécessaire, coût, efficacité, acceptabilité, effets distributifs. Aucun instrument n’est optimal en toutes circonstances.</div></details>
+</article>
+<article class="exercise-card" id="ex-hggsp2-01">
+  <div class="exercise-top">
+    <div><div class="level">HGGSP Terminale</div><div class="exercise-title">Thème 2 — Faire la guerre, faire la paix</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Question problématisée</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Explique en quoi la pensée de Clausewitz permet de comprendre certaines guerres mais connaît aussi des limites pour les conflits contemporains.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Attendus : guerre comme acte politique, duel, montée aux extrêmes, guerre réelle/absolue ; limites face aux acteurs non étatiques, asymétries, terrorisme, hybridation et conflictualités diffuses.</div></details>
+</article>
+<article class="exercise-card" id="ex-hggsp2-02">
+  <div class="exercise-top">
+    <div><div class="level">HGGSP Terminale</div><div class="exercise-title">Thème 2 — Faire la guerre, faire la paix</div></div>
+    <span class="pill">35 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 3</span>
+    <span class="pill">Dissertation</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Propose problématique et plan détaillé : « Faire la paix depuis 1648 : entre équilibre des puissances et sécurité collective ».</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Plan possible : Westphalie et équilibre ; XIXe-XXe tentatives multilatérales ; ONU et sécurité collective, avancées et limites. Illustrer précisément.</div></details>
+</article>
+<article class="exercise-card" id="ex-hggsp4-01">
+  <div class="exercise-top">
+    <div><div class="level">HGGSP Terminale</div><div class="exercise-title">Thème 4 — Patrimoine</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Étude critique</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">À partir d’un exemple patrimonial vu en cours, distingue les enjeux de conservation, de valorisation, d’usage politique et de développement économique.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Une bonne réponse distingue les acteurs, les échelles, les conflits d’usage et les effets de la patrimonialisation.</div></details>
+</article>
+<article class="exercise-card" id="ex-hggsp4-02">
+  <div class="exercise-top">
+    <div><div class="level">HGGSP Terminale</div><div class="exercise-title">Thème 4 — Patrimoine</div></div>
+    <span class="pill">35 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 3</span>
+    <span class="pill">Dissertation</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Construis un plan : « Le patrimoine est-il seulement un héritage à protéger ? »</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Montrer qu’il est construit/sélectionné, qu’il porte identités et mémoires, qu’il est ressource économique et géopolitique, et peut devenir objet de conflits.</div></details>
+</article>
+<article class="exercise-card" id="ex-hggsp5-01">
+  <div class="exercise-top">
+    <div><div class="level">HGGSP Terminale</div><div class="exercise-title">Thème 5 — Environnement</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Question problématisée</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Montre que les relations des sociétés à l’environnement combinent exploitation, protection et transformations des représentations.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Mobiliser temporalités longues, industrialisation, ressources, conservation, changement climatique, acteurs et échelles.</div></details>
+</article>
+<article class="exercise-card" id="ex-hggsp5-02">
+  <div class="exercise-top">
+    <div><div class="level">HGGSP Terminale</div><div class="exercise-title">Thème 5 — Environnement</div></div>
+    <span class="pill">35 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 3</span>
+    <span class="pill">Dissertation</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Construis problématique et plan : « Le changement climatique, enjeu de coopération internationale et de rivalités ».</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Articuler diagnostic global, négociations et gouvernance, intérêts divergents, responsabilités différenciées, financements, puissance et tensions géopolitiques.</div></details>
+</article>
+<article class="exercise-card" id="ex-hggsp6-01">
+  <div class="exercise-top">
+    <div><div class="level">HGGSP Terminale</div><div class="exercise-title">Thème 6 — L’enjeu de la connaissance</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Question problématisée</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Explique pourquoi la production et la diffusion de la connaissance constituent un enjeu de puissance.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Éducation/recherche, innovation, brevets, données, réseaux scientifiques, attractivité, renseignement, contrôle de l’information et souveraineté technologique.</div></details>
+</article>
+<article class="exercise-card" id="ex-hggsp6-02">
+  <div class="exercise-top">
+    <div><div class="level">HGGSP Terminale</div><div class="exercise-title">Thème 6 — L’enjeu de la connaissance</div></div>
+    <span class="pill">30 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 3</span>
+    <span class="pill">Étude critique</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Choisis un exemple du cours et montre comment circulation de la connaissance et secret peuvent coexister.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Identifier acteurs, intérêt à diffuser/cooperer, intérêt à protéger, dispositifs de secret, effets sur puissance et innovation.</div></details>
+</article>
+<article class="exercise-card" id="ex-ph-01">
+  <div class="exercise-top">
+    <div><div class="level">Philosophie</div><div class="exercise-title">Dissertation</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Méthode</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Sujet : « Être libre, est-ce faire ce que l’on veut ? » Dégage les termes, la difficulté et formule une problématique.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Distinguer désir/volonté, absence de contrainte/autonomie. Difficulté : suivre tous ses désirs peut conduire à une forme de dépendance. La problématique doit faire apparaître cette tension.</div></details>
+</article>
+<article class="exercise-card" id="ex-ph-02">
+  <div class="exercise-top">
+    <div><div class="level">Philosophie</div><div class="exercise-title">Explication de texte</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Méthode</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Sur un extrait philosophique du CNED, formule en une phrase la thèse, puis découpe le mouvement argumentatif en 2 ou 3 étapes.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">La thèse n’est pas le thème. Chaque mouvement doit correspondre à une fonction argumentative : poser, distinguer, réfuter, démontrer, conclure…</div></details>
+</article>
+<article class="exercise-card" id="ex-ph-03">
+  <div class="exercise-top">
+    <div><div class="level">Philosophie</div><div class="exercise-title">Notions</div></div>
+    <span class="pill">15 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 1</span>
+    <span class="pill">Automatismes</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Pour vérité, liberté et justice : donne une définition de travail, une distinction utile et un exemple problématique pour chaque notion.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Objectif : disposer d’un kit conceptuel mobilisable. Les distinctions doivent être opératoires, pas récitées sans lien avec un problème.</div></details>
+</article>
+<article class="exercise-card" id="ex-hg-01">
+  <div class="exercise-top">
+    <div><div class="level">Histoire-géographie</div><div class="exercise-title">Première — Première Guerre mondiale</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Synthèse</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">En 15 lignes, explique pourquoi la Première Guerre mondiale est une guerre totale et une expérience de violence de masse.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Mobiliser fronts/arrière, mobilisation économique et sociale, propagande, civils, violences combattantes, génocide des Arméniens, bilan humain et matériel.</div></details>
+</article>
+<article class="exercise-card" id="ex-hg-02">
+  <div class="exercise-top">
+    <div><div class="level">Histoire-géographie</div><div class="exercise-title">Première — IIIe République</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Synthèse</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Construis une fiche en 6 points : enracinement républicain, libertés, laïcité, crises, société, empire colonial.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">La fiche doit articuler institutions, pratiques politiques, culture républicaine, conflits et limites, sans juxtaposer des dates.</div></details>
+</article>
+<article class="exercise-card" id="ex-hg-03">
+  <div class="exercise-top">
+    <div><div class="level">Histoire-géographie</div><div class="exercise-title">Première — Métropolisation</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Croquis / notions</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Définis métropolisation puis explique trois effets spatiaux observables à l’échelle mondiale et dans une métropole.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Concentration des fonctions supérieures et populations ; hiérarchisation des villes, fragmentation/ségrégation, étalement, recompositions des mobilités et centralités.</div></details>
+</article>
+<article class="exercise-card" id="ex-hg-04">
+  <div class="exercise-top">
+    <div><div class="level">Histoire-géographie</div><div class="exercise-title">Première — Espaces productifs</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Étude de cas</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">À partir d’un espace productif étudié, explique comment il s’insère dans la mondialisation et se recompose.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Localisation, acteurs, réseaux/flux, avantages, innovation, concurrence, transition et recomposition territoriale.</div></details>
+</article>
+<article class="exercise-card" id="ex-hg-05">
+  <div class="exercise-top">
+    <div><div class="level">Histoire-géographie</div><div class="exercise-title">Terminale — 1929 à 1945</div></div>
+    <span class="pill">25 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Pont Première-Terminale</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Fais une frise 1918–1945 avec 10 repères et, pour chacun, indique en quelques mots son lien avec la crise des démocraties et la guerre.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Objectif : construire les enchaînements plutôt qu’une liste de dates isolées : sortie de guerre, crise, totalitarismes, tensions, guerre mondiale.</div></details>
+</article>
+<article class="exercise-card" id="ex-sci-01">
+  <div class="exercise-top">
+    <div><div class="level">Enseignement scientifique</div><div class="exercise-title">Première — Énergie / Soleil</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Application</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">À partir d’un document donnant puissance reçue et surface, calcule une énergie reçue sur une durée puis interprète l’ordre de grandeur.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Identifier les unités, utiliser E=P×Δt, convertir correctement la durée, puis commenter la cohérence de l’ordre de grandeur.</div></details>
+</article>
+<article class="exercise-card" id="ex-sci-02">
+  <div class="exercise-top">
+    <div><div class="level">Enseignement scientifique</div><div class="exercise-title">Première — Son et musique</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Application</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Explique la différence entre fréquence, période, hauteur et intensité sonore, puis relie-les à un signal sinusoïdal.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">T=1/f ; fréquence ↔ hauteur ; amplitude/intensité ↔ niveau sonore. Ne pas confondre fréquence et amplitude.</div></details>
+</article>
+<article class="exercise-card" id="ex-sci-03">
+  <div class="exercise-top">
+    <div><div class="level">Enseignement scientifique</div><div class="exercise-title">Méthode scientifique</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Documents</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Prends un graphique scientifique du CNED : formule une lecture descriptive, puis une interprétation, puis une limite.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Séparer ce que montre le document de l’explication. Citer axes/unités/tendance ; interpréter avec le cours ; signaler incertitude, corrélation/causalité ou limites de l’échantillon.</div></details>
+</article>
+<article class="exercise-card" id="ex-lv-01">
+  <div class="exercise-top">
+    <div><div class="level">Langues</div><div class="exercise-title">Expression orale</div></div>
+    <span class="pill">15 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Oral</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Choisis un axe étudié. Parle 2 minutes sans notes : définition du thème, un exemple précis, ton analyse, une ouverture.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Objectif : discours structuré et intelligible. Utilise 5 connecteurs, 3 mots de vocabulaire thématique et au moins une phrase complexe.</div></details>
+</article>
+<article class="exercise-card" id="ex-lv-02">
+  <div class="exercise-top">
+    <div><div class="level">Langues</div><div class="exercise-title">Expression écrite</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Écrit</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">Rédige 150 à 180 mots sur un sujet lié à un axe du programme en utilisant introduction, deux paragraphes argumentés et conclusion.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Contrôle : réponse au sujet, organisation, variété lexicale, temps cohérents, connecteurs, relecture ciblée sur accords et syntaxe.</div></details>
+</article>
+<article class="exercise-card" id="ex-emc-01">
+  <div class="exercise-top">
+    <div><div class="level">EMC</div><div class="exercise-title">Argumentation civique</div></div>
+    <span class="pill">20 min</span>
+  </div>
+  <div class="exercise-meta">
+    <span class="pill accent">Niveau 2</span>
+    <span class="pill">Documents</span>
+    <span class="pill">À faire</span>
+  </div>
+  <div class="exercise-prompt">À partir d’un document d’actualité fourni par le CNED, identifie le principe civique en jeu, les acteurs, le conflit de droits ou d’intérêts et propose une réponse argumentée.</div>
+  <details class="exercise-solution"><summary><strong>Voir le corrigé</strong></summary><div style="margin-top:8px">Réponse attendue : principe défini, document exploité précisément, pluralité des positions, argumentation fondée sur règles/institutions et non sur une simple opinion.</div></details>
+</article></div>
   </article>
 </section>
 
@@ -1164,7 +1814,7 @@ function initExerciseBank(){
   $('#changeDailyExercise').addEventListener('click',()=>renderDailyExercise(true));
 }
 $('#resetBtn').addEventListener('click',()=>{if(confirm('Réinitialiser le planning, les cases cochées et la progression ?')){['day','week','progress','studylog'].forEach(k=>memory.del('bac2027.v2.'+k));memory.del('bac2027.v3.exerciseProgress');location.reload()}});
-initRoute();initDate();initPlanner('day',3);initPlanner('week',3);initProgress();renderStudyLog();initExerciseBank();markCurrentPhase();countdown();
+initRoute();initDate();initPlanner('day',3);initPlanner('week',3);initProgress();renderStudyLog();initExerciseBank();markCurrentPhase();countdown();document.documentElement.classList.add('js');
 </script>
 </body>
 </html>
