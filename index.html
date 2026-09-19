@@ -621,6 +621,13 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
 .exercise-empty{padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:14px;background:#fff}
 .daily-exercise{margin-top:12px;padding:13px;border-radius:15px;background:linear-gradient(135deg,#f5f3ff,#eefcf8);border:1px solid #ddd8ff}
 .daily-exercise .prompt{font-size:13px;margin-top:7px;color:#344054}
+.daily-ex-grid{display:grid;gap:9px;margin-top:12px}
+.daily-mini{padding:12px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.daily-mini .daily-mini-title{font-weight:850;font-size:13px}
+.daily-mini .daily-mini-prompt{font-size:12px;line-height:1.45;color:#475467;margin-top:6px}
+.daily-mini .daily-mini-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px}
+.daily-mini .daily-mini-actions button{border:1px solid var(--line);background:#fff;color:#344054;border-radius:10px;padding:7px 9px;font-size:11px;font-weight:850}
+@media(min-width:700px){.daily-ex-grid{grid-template-columns:repeat(3,1fr)}}
 @media(min-width:700px){.exercise-toolbar{grid-template-columns:repeat(5,1fr)}.exercise-toolbar button{width:auto}.exercise-stats{grid-template-columns:repeat(4,1fr)}}
 @media(min-width:700px){.bankgrid{grid-template-columns:repeat(2,1fr)}}
 .noscript{margin:12px 14px;padding:12px;border-radius:12px;background:#fff4d6;border:1px solid #f2d183;color:#6b4d00;font-size:13px} :focus-visible{outline:3px solid #93a0ff;outline-offset:2px} .hidden{display:none!important}
@@ -721,11 +728,30 @@ button,input,textarea{font:inherit} button,a{-webkit-tap-highlight-color:transpa
     </article>
   </div>
   <article id="dailyExercise" class="daily-exercise">
-      <div class="row"><div><div class="level">Exercice ciblé du jour</div><strong id="dailyExerciseTitle">Maths Première — Second degré</strong></div><span class="pill accent" id="dailyExerciseTime">12 min</span></div>
-      <div class="prompt" id="dailyExercisePrompt">Pour f(x)=2x²−5x−3 : calcule le discriminant, les racines éventuelles et factorise f(x).</div>
+      <div class="row">
+        <div><div class="level">Entraînement ciblé du jour</div><strong>3 exercices recommandés</strong><div class="sub">Environ 45 à 60 min au total. La sélection privilégie les priorités, les exercices non faits et ceux à revoir.</div></div>
+        <span class="pill accent" id="dailyExerciseTotal">≈ 50 min</span>
+      </div>
+      <div id="dailyExerciseList" class="daily-ex-grid">
+        <div class="daily-mini">
+          <div class="daily-mini-title">Maths Première — Second degré</div>
+          <div class="daily-mini-prompt">Pour f(x)=2x²−5x−3 : calcule le discriminant, les racines éventuelles et factorise f(x).</div>
+          <div class="daily-mini-actions"><span class="pill">12 min</span><button type="button" data-daily-open="m2-01">Faire</button></div>
+        </div>
+        <div class="daily-mini">
+          <div class="daily-mini-title">Français Première — Commentaire</div>
+          <div class="daily-mini-prompt">À partir d’un extrait de ton cours, écris une problématique de commentaire qui ne reformule pas simplement le thème du texte.</div>
+          <div class="daily-mini-actions"><span class="pill">15 min</span><button type="button" data-daily-open="fr-01">Faire</button></div>
+        </div>
+        <div class="daily-mini">
+          <div class="daily-mini-title">HGGSP Terminale — Faire la guerre, faire la paix</div>
+          <div class="daily-mini-prompt">Explique en quoi la pensée de Clausewitz permet de comprendre certaines guerres mais connaît aussi des limites pour les conflits contemporains.</div>
+          <div class="daily-mini-actions"><span class="pill">25 min</span><button type="button" data-daily-open="hggsp2-01">Faire</button></div>
+        </div>
+      </div>
       <div class="exercise-actions">
-        <button type="button" class="primarybtn" id="openDailyExercise">Faire l’exercice</button>
-        <button type="button" class="ghostbtn" id="changeDailyExercise">Un autre</button>
+        <button type="button" class="ghostbtn" id="changeDailyExercise">Une autre série</button>
+        <button type="button" class="primarybtn" id="openExerciseBank">Voir toute la banque</button>
       </div>
     </article>
     <div class="callout" style="margin-top:12px"><strong>Point administratif :</strong> le scénario « tout en 2027 » reste conditionné à l'autorisation du SIEC pour présenter les épreuves anticipées en Terminale (CINEAT01).</div>
@@ -1727,7 +1753,7 @@ function exState(){return memory.get(EXKEY,{})}
 function saveExState(s){memory.set(EXKEY,s)}
 function exStatus(id){return exState()[id]?.status||'todo'}
 function setExStatus(id,status){
-  const s=exState();s[id]={...(s[id]||{}),status,lastAttempt:new Date().toISOString()};saveExState(s);renderExerciseBank();renderExerciseStats();renderDailyExercise();
+  const s=exState();s[id]={...(s[id]||{}),status,lastAttempt:new Date().toISOString()};saveExState(s);renderExerciseBank();renderExerciseStats();renderDailyExercises();
 }
 function renderExerciseStats(){
   const s=exState();let done=0,review=0,hard=0;
@@ -1781,18 +1807,43 @@ function recommendedExercises(){
   };
   return EXERCISES.slice().sort((a,b)=>score(b)-score(a));
 }
-let dailyExerciseId=null;
-function renderDailyExercise(forceNext=false){
-  if(!EXERCISES.length)return;
-  let pool=recommendedExercises();
-  if(forceNext&&dailyExerciseId)pool=pool.filter(x=>x.id!==dailyExerciseId);
+let dailySeriesOffset=0;
+let dailyExerciseIds=[];
+function selectDailyExercises(){
+  const pool=recommendedExercises();
+  if(!pool.length)return [];
   const dayIndex=Math.floor(new Date().setHours(0,0,0,0)/86400000);
-  const top=pool.slice(0,Math.min(8,pool.length));
-  const ex=top[Math.abs(dayIndex+(forceNext?1:0))%top.length]||pool[0];
-  dailyExerciseId=ex.id;
-  $('#dailyExerciseTitle').textContent=ex.subject+' — '+ex.chapter;
-  $('#dailyExerciseTime').textContent=ex.minutes+' min';
-  $('#dailyExercisePrompt').textContent=ex.prompt;
+  const start=Math.abs(dayIndex+dailySeriesOffset*3)%pool.length;
+  const rotated=pool.slice(start).concat(pool.slice(0,start));
+  const picked=[],subjects=new Set();
+  for(const ex of rotated){
+    if(!subjects.has(ex.subject)){picked.push(ex);subjects.add(ex.subject)}
+    if(picked.length===3)break;
+  }
+  if(picked.length<3){
+    for(const ex of rotated){
+      if(!picked.some(x=>x.id===ex.id))picked.push(ex);
+      if(picked.length===3)break;
+    }
+  }
+  return picked;
+}
+function bindDailyExerciseButtons(){
+  $('[data-daily-open]').forEach(b=>b.addEventListener('click',()=>openExercise(b.dataset.dailyOpen)));
+}
+function renderDailyExercises(){
+  if(!EXERCISES.length)return;
+  const selected=selectDailyExercises();
+  dailyExerciseIds=selected.map(x=>x.id);
+  const root=$('#dailyExerciseList');if(!root)return;
+  root.innerHTML=selected.map(x=>'<div class="daily-mini">'+
+    '<div class="daily-mini-title">'+esc(x.subject)+' — '+esc(x.chapter)+'</div>'+
+    '<div class="daily-mini-prompt">'+esc(x.prompt)+'</div>'+
+    '<div class="daily-mini-actions"><span class="pill">'+x.minutes+' min</span><button type="button" data-daily-open="'+esc(x.id)+'">Faire</button></div>'+
+    '</div>').join('');
+  const total=selected.reduce((n,x)=>n+Number(x.minutes||0),0);
+  if($('#dailyExerciseTotal'))$('#dailyExerciseTotal').textContent='≈ '+total+' min';
+  bindDailyExerciseButtons();
 }
 function openExercise(id){
   const ex=EXERCISES.find(x=>x.id===id);if(!ex)return;
@@ -1802,16 +1853,16 @@ function openExercise(id){
 }
 function initExerciseBank(){
   if(!EXERCISES.length){
-    if($('#dailyExerciseTitle')) $('#dailyExerciseTitle').textContent='Banque momentanément indisponible';
-    if($('#dailyExercisePrompt')) $('#dailyExercisePrompt').textContent='Recharge la page. Si le problème persiste, les exercices restent accessibles après la prochaine mise à jour.';
-    if($('#dailyExerciseTime')) $('#dailyExerciseTime').textContent='—';
+    if($('#dailyExerciseList')) $('#dailyExerciseList').innerHTML='<div class="exercise-empty">Banque momentanément indisponible. Recharge la page.</div>';
+    if($('#dailyExerciseTotal')) $('#dailyExerciseTotal').textContent='—';
     return;
   }
-  populateBankFilters();renderExerciseStats();renderExerciseBank();renderDailyExercise();
+  populateBankFilters();renderExerciseStats();renderExerciseBank();renderDailyExercises();
   ['bankSubject','bankChapter','bankLevel','bankStatus'].forEach(id=>$('#'+id).addEventListener('change',()=>{if(id==='bankSubject')updateChapterFilter();renderExerciseBank()}));
   $('#pickExercise').addEventListener('click',()=>{const list=filteredExercises();if(!list.length)return;const weakest=list.sort((a,b)=>{const rank={hard:3,review:2,todo:1,done:0};return (rank[exStatus(b.id)]-rank[exStatus(a.id)])||((b.priority||1)-(a.priority||1))})[0];openExercise(weakest.id)});
-  $('#openDailyExercise').addEventListener('click',()=>openExercise(dailyExerciseId));
-  $('#changeDailyExercise').addEventListener('click',()=>renderDailyExercise(true));
+  $('#changeDailyExercise').addEventListener('click',()=>{dailySeriesOffset++;renderDailyExercises()});
+  $('#openExerciseBank').addEventListener('click',()=>go('bank'));
+  bindDailyExerciseButtons();
 }
 $('#resetBtn').addEventListener('click',()=>{if(confirm('Réinitialiser le planning, les cases cochées et la progression ?')){['day','week','progress','studylog'].forEach(k=>memory.del('bac2027.v2.'+k));memory.del('bac2027.v3.exerciseProgress');location.reload()}});
 initRoute();initDate();initPlanner('day',3);initPlanner('week',3);initProgress();renderStudyLog();initExerciseBank();markCurrentPhase();countdown();document.documentElement.classList.add('js');
